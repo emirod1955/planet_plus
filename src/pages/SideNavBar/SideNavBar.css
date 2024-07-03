@@ -1,6 +1,6 @@
 .sideNavBar{
-    width: 40rem;
-    height: calc(100vh - 7rem);
+    width: 30rem;
+    height: calc(100vh - 5rem);
     padding: 3rem;
     background-color: #f3f3f3;
     display: flex;
@@ -78,9 +78,8 @@ ul li{
     opacity: 70%;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1150px){
     .sideNavBar{
         display: none;
     }
 }
-
