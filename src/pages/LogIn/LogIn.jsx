@@ -49,14 +49,16 @@ const LogIn = () =>{
     return(
         <div className='LogIn'>
             <div className='LogIn-left'>
-                <h1>Together for a <br /><span id='LogIn-leftHighlight'>Greener</span><br />Tomorrow</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
-                <div className='LogIn-diagram'>
-                    <img src={hand} alt="hand" />
-                    <p>&rarr;</p>
-                    <img src={phone} alt="phone" />
-                    <p>&rarr;</p>
-                    <img src={earth} alt="earth" />
+                <div className="LogIn-leftText">
+                  <h1>Together for a <br /><span id='LogIn-leftHighlight'>Greener</span><br />Tomorrow</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
+                  <div className='LogIn-diagram'>
+                      <img src={hand} alt="hand" />
+                      <p>&rarr;</p>
+                      <img src={phone} alt="phone" />
+                      <p>&rarr;</p>
+                      <img src={earth} alt="earth" />
+                  </div>
                 </div>
                 <div className='LogIn-leftButton'>
                     <button onClick={handleClick}><img src={google} alt="" /><p>Continue with Google</p></button>

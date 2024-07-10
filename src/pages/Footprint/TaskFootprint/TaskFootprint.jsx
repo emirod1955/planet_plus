@@ -10,7 +10,7 @@ const TaskFootprint = ({title, content, state}) => {
             <h3>{title}</h3>
             <p className='TaskFootprint-content'>{content}</p>
             <div className='TaskFootprint-bottom'>
-                <button style={{backgroundColor : state ? '#00ba00' : '#685CFE'}}>
+                <button style={{backgroundColor : state ? '#00ba00' : '#3170cc'}}>
                     <p style={{display : state ? 'none' : 'block'}}>verify</p>
                     <img src={check} alt="check" />
                 </button>

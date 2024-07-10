@@ -24,8 +24,8 @@ const Graph = () =>{
                 <LineChart
                     xAxis={[{ data: [1, 3, 5, 8, 10] }]}
                     series={[
-                        { curve: "natural", data: [0, 2, 6, 3, 9.3], color: '#7BAC23'},
-                        { curve: "natural", data: [6, 7, 9.5, 4, 6], color: '#685CFE'}
+                        { curve: "natural", data: [-1, 2, 6, 3, 9.3], color: '#7BAC23'},
+                        { curve: "natural", data: [6, 7, 9.5, 4, 6], color: '#666666'}
                     ]}
                     axisHighlight={{
                         x: 'none', 
@@ -72,7 +72,7 @@ const Footprint = () =>{
                                 <div className="footprintText-bottom">
                                     <h2>382 kg</h2>
                                     <p><span style={{color: '#7BAC23', fontWeight: '700'}}>Your carbon footprint</span> in the last week</p>
-                                    <p>That's 75kg CO₂ above <span style={{color: '#685CFE', fontWeight: '700'}}>average</span></p>
+                                    <p>That's 75kg CO₂ above <span style={{color: '#666666', fontWeight: '700'}}>average</span></p>
                                 </div>
                                 <Graph/>
                             </div>

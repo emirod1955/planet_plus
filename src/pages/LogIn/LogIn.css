@@ -1,5 +1,6 @@
 .LogIn{
     display: flex;
+    height: calc(100vh - 5rem);
 }
 
 .LogIn-left{
@@ -8,6 +9,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.LogIn-leftText{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
 }
 
 .LogIn-left h1{
@@ -26,7 +33,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: calc(100vh - 5rem);
     width: 50vw;
 }
 
@@ -34,8 +40,7 @@
     font-size: 5rem;
     display: flex;
     align-items: center;
-    gap: 8rem;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .LogIn-diagram img{
@@ -56,8 +61,57 @@
     align-items: center;
     gap: 1rem;
     cursor: pointer;
+    color: #000;
 }
 
 .LogIn-leftButton button img{
     width: 1.6rem;
+}
+
+@media (max-width: 1200px){
+    .LogIn-left h1{
+        font-size: 5rem;
+    }
+    
+    .LogIn-left h1 span{
+        font-size: 7rem;
+    }
+}
+
+@media (max-width: 910px){
+    .LogIn-left{
+        width: 60vw;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .LogIn-right{
+        width: 40vw;
+    }
+
+    .LogIn-diagram img{
+        width: 4rem;
+    }
+
+    .LogIn-diagram{
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 650px){
+    .LogIn-left{
+        width: 100vw;
+    }
+
+    .LogIn-right{
+        display: none;
+    }
+
+    .LogIn-leftText{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
 }
