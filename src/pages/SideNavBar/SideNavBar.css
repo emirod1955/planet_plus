@@ -26,7 +26,7 @@
 }
 
 .sideNavBar ul li a.active{
-    background-color: #685CFE;
+    background-color: #245892;
     color: #fff;
     opacity: 100%;
 }
@@ -59,12 +59,9 @@ ul li{
     font-size: 2rem;
 }
 
-.sideNavBar-profile span{
-    background-color: #685CFE;
-    padding: 1rem;
-    color: #fff;
-    font-weight: 700;
-    border-radius: 1rem;
+#sideNavBar-profilePhoto{
+    width: 3rem;
+    border-radius: 50%;
 }
 
 .sideNavBar-social{

@@ -1,0 +1,43 @@
+.TaskFootprint{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    /*box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;*/
+    max-width: 50rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    /*border: 1px solid black;*/
+    background-color: #f3f3f3;
+}
+
+.TaskFootprint-bottom{
+    display: flex;
+    justify-content: end;
+}
+
+.TaskFootprint-bottom button{
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: none;
+    gap: 1rem;
+    background-color: #685CFE;
+    color: #fff;
+    border-radius: .5rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: .5rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.TaskFootprint-bottom img{
+    width: 2rem;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(161deg) brightness(105%) contrast(105%);
+}
+
+@media (max-width: 1000px){
+    .TaskFootprint{
+        padding: 1rem 2rem;
+    }
+}

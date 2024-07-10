@@ -1,11 +1,16 @@
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
 //import react router
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 //import img
 import home from './assets/home.svg'
 import foot from './assets/foot.svg'
 import trophy from './assets/trophy.svg'
 import ranking from './assets/ranking.svg'
+
+import profile from './assets/profile.png'
 
 import instagram from './assets/instagram.svg'
 import twitter from './assets/twitter.svg'
@@ -14,11 +19,29 @@ import twitter from './assets/twitter.svg'
 import './SideNavBar.css'
 
 const SideNavBar = () =>{
+    const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState({});
+
+    const getUserDetails = async (accessToken) => {
+        const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`);
+        const data = await response.json();
+        setUserDetails(data);
+    };
+
+        useEffect(() => {
+            const accessToken = Cookies.get("access_token");
+            if (!accessToken) {
+                navigate("/");
+            }
+
+            getUserDetails(accessToken);
+        }, [navigate]);
+
     return(
         <div className='sideNavBar'>
             <ul>
-                <li className='sideNavBar-profile'><span>LS</span><p>Liam Smith</p></li>
-                <li><NavLink to='/'><img src={home} alt="Home" />Home</NavLink></li>
+                <li className='sideNavBar-profile'><img id='sideNavBar-profilePhoto' src={userDetails.picture} alt="photo" /><p>{userDetails.name}</p></li>
+                <li><NavLink to='/dashboard'><img src={home} alt="Home" />Home</NavLink></li>
                 <li><NavLink to='/your-footprint'><img src={foot} alt="Your footprint" />Your footprint</NavLink></li>
                 <li><NavLink to='/badges'><img src={trophy} alt="Badges" />Badges</NavLink></li>
                 <li><NavLink to='/hall-of-fame'><img src={ranking} alt="Hall of fame" />Hall of fame</NavLink></li>

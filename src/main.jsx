@@ -1,3 +1,4 @@
+//import react
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
@@ -8,12 +9,25 @@ import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import './assets/index.css'
 
 //import components
+import { TopNavBarHome } from './pages/TopNavBarHome/TopNavBarHome';
 import { TopNavBar } from './pages/TopNavBar/TopNavBar';
 import { SideNavBar } from './pages/SideNavBar/SideNavBar';
 
-import { Home } from './pages/Home/Home';
+import { LogIn } from './pages/LogIn/LogIn';
+import { Dashboard } from './pages/Dashboard/Dashboard';
+import { Footprint } from './pages/Footprint/Footprint';
 
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
+
+
+const LogInWrapper = () =>{
+  return(
+    <div>
+      <TopNavBarHome/>
+      <Outlet/>
+    </div>
+  );
+}
 
 const ComponentsWrapper = () =>{
   return(
@@ -30,31 +44,42 @@ const ComponentsWrapper = () =>{
 const ErrorComponentsWrapper = () =>{
   return(
     <div>
-      <TopNavBar/>
-      <div className='desktop-content'>
-        <SideNavBar/>
-        <ErrorPage/>
-      </div>
+      <TopNavBarHome/>
+      <ErrorPage/>
     </div>
   );
 }
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <ComponentsWrapper/>,
+      path: "/",
+      element: <LogInWrapper/>,
       errorElement: <ErrorComponentsWrapper/>,
       children:[
         {
-          path: '/',
-          element: <Home/>
+          path: "/",
+          element: <LogIn/>
+        }
+      ]
+    },
+    {
+      path: '/',
+      element: <ComponentsWrapper/>,
+      children:[
+        {
+          path: '/dashboard',
+          element: <Dashboard/>
+        },
+        {
+          path: '/your-footprint',
+          element: <Footprint />
         }
       ]
     }
   ]);  
 
   ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
+      <React.StrictMode>
         <RouterProvider router={router} />
-    </React.StrictMode>,
+      </React.StrictMode>,
   )

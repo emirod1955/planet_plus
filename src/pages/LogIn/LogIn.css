@@ -1,0 +1,63 @@
+.LogIn{
+    display: flex;
+}
+
+.LogIn-left{
+    width: 50vw;
+    padding: 0 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.LogIn-left h1{
+    font-size: 7rem;
+    font-weight: 900;
+    color: #1e1e1e;
+}
+
+.LogIn-left h1 span{
+    color: #3A8D25;
+    font-size: 9rem;
+}
+
+.LogIn-right{
+    background-image: url("./assets/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 5rem);
+    width: 50vw;
+}
+
+.LogIn-diagram{
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+    justify-content: center;
+}
+
+.LogIn-diagram img{
+    width: 6rem;
+}
+
+.LogIn-leftButton{
+    display: flex;
+    justify-content: center;
+}
+
+.LogIn-leftButton button{
+    border: 1px solid black;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.LogIn-leftButton button img{
+    width: 1.6rem;
+}
