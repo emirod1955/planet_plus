@@ -16,6 +16,8 @@ import { SideNavBar } from './pages/SideNavBar/SideNavBar';
 import { LogIn } from './pages/LogIn/LogIn';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Footprint } from './pages/Footprint/Footprint';
+import { Badges } from './pages/Badges/Badges';
+import { HallOfFame } from './pages/HallOfFame/HallOfFame';
 
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
 
@@ -73,6 +75,14 @@ const ErrorComponentsWrapper = () =>{
         {
           path: '/your-footprint',
           element: <Footprint />
+        },
+        {
+          path: '/badges',
+          element: <Badges/>
+        },
+        {
+          path: '/hall-of-fame',
+          element: <HallOfFame/>
         }
       ]
     }

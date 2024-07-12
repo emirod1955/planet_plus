@@ -62,28 +62,28 @@ const Footprint = () =>{
         <>
             {userDetails ? (
                 <div className="footprint">
-                    <div className="footprint-box">
-                        <div className="footprint-top">
-                            <div className="footprintText-top">
-                                <h1>Overview</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
-                            </div>
-                            <div className="footprintGraph-bottom">
-                                <div className="footprintText-bottom">
-                                    <h2>382 kg</h2>
-                                    <p><span style={{color: '#7BAC23', fontWeight: '700'}}>Your carbon footprint</span> in the last week</p>
-                                    <p>That's 75kg CO₂ above <span style={{color: '#666666', fontWeight: '700'}}>average</span></p>
+                        <div className="footprintBox">
+                            <div className="footprint-top">
+                                <div className="footprintText-top">
+                                    <h1>Overview</h1>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
                                 </div>
-                                <Graph/>
+                                <div className="footprintGraph-bottom">
+                                    <div className="footprintText-bottom">
+                                        <h2>382 kg</h2>
+                                        <p><span style={{color: '#7BAC23', fontWeight: '700'}}>Your carbon footprint</span> in the last week</p>
+                                        <p>That's 75kg CO₂ above <span style={{color: '#666666', fontWeight: '700'}}>average</span></p>
+                                    </div>
+                                    <Graph/>
+                                </div>
+                            </div>
+                            <div className="footprint-bottom">
+                                <TaskFootprint title="Recycle plastic" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
+                                <TaskFootprint title="Consume less energy" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={true}/>
+                                <TaskFootprint title="Don't use the car" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. " state={true}/>
+                                <TaskFootprint title="Recycle cardboard" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
                             </div>
                         </div>
-                        <div className="footprint-bottom">
-                            <TaskFootprint title="Recycle plastic" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
-                            <TaskFootprint title="Consume less energy" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={true}/>
-                            <TaskFootprint title="Don't use the car" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. " state={true}/>
-                            <TaskFootprint title="Recycle cardboard" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
-                        </div>
-                    </div>
                 </div>
             ) : (
                 <div>
