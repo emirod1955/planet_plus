@@ -1,0 +1,134 @@
+.modal{
+    position: fixed;
+    margin: auto;
+    padding: 5rem;
+    border: none;
+}
+
+.modal-top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.modalBox.verifying *{
+    visibility: hidden;
+}
+
+.verifying-message{
+    visibility: hidden;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.verifying-message h1{
+    font-size: 4rem;
+    color: #3e3e3e;
+}
+
+.verifying-message.verifying{
+    visibility: visible;
+}
+
+.verifying-messageText img{
+    width: 20rem;
+}
+
+.verifying-messageText{
+    display: flex;
+    align-items: center;
+}
+
+.modal-topText{
+    width: 50rem;
+}
+
+.modal-topText h1{
+    color: #1e1e1e;
+}
+
+.modal-topText p{
+    color: #3e3e3e;
+}
+
+.modal-top button{
+    border: none;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+
+.modal-top button img{
+    width: 3rem;
+    opacity: 80%;
+}
+
+.modal-bottom{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.modal-bottom img{
+    width: 3rem;
+}
+
+.modal-bottom-retake{
+    border: none;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cb2e2e;
+    border-radius: 1rem 0 0 1rem;
+    cursor: pointer;
+}
+
+.modal-bottom-verify{
+    background-color: #3170cc;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    gap: 1rem;
+    padding: 1rem 5rem;
+    font-size: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.modal-bottom-verify img{
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(161deg) brightness(105%) contrast(105%);
+    width: 2rem;
+}
+
+.modalVideo{
+    width: 100%;
+}
+
+@media (max-width: 700px){
+    .modal{
+        padding: 2rem;
+    }
+
+    .modal-topText{
+        width: 80%;
+    }
+}
