@@ -22,7 +22,7 @@ const TaskFootprint = ({title, content, state}) => {
                     <img src={check} alt="check" />
                 </button>
             </div>
-            <Modal openModal={modal} closeModal={() => setModal(false)}/>
+            <Modal openModal={modal} closeModal={() => setModal(false)} taskTitle={title}/>
         </div>
     );
 }

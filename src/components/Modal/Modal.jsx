@@ -1,11 +1,12 @@
 //import react
-import { useEffect, useRef, useState, useCallback} from "react";
+import { useEffect, useRef, useState} from "react";
 
 //import webcam
 import Webcam from "react-webcam";
 
 //import styles
 import './Modal.css'
+import './assets/loading.css'
 
 //import img
 import check from '../../assets/img/check.svg'
@@ -16,8 +17,9 @@ import gemini from './assets/gemini.png'
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI('AIzaSyAfcda0jwF-bxh_wvfjKmxYeIIIbOCpizQ');
 
-const Modal = ({openModal, closeModal}) => {
-    const [imgSrc, setImgSrc] = useState()
+const Modal = ({openModal, closeModal, taskTitle}) => {
+    const [aiResponse, setResponse] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const webcamRef = useRef(null);
     const ref = useRef();
@@ -31,12 +33,15 @@ const Modal = ({openModal, closeModal}) => {
     }, [openModal]);
 
     async function run() {
+        setLoading(true)
+        setResponse('');
+
         const imageSrc = webcamRef.current.getScreenshot();
 
         // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-        const prompt = "in this image you can check plastic recycling? Answer with yes or no only";
+        const prompt = `say me that if the task: ${taskTitle}, can be seen in the photo? Answer with yes or no only`;
       
         const imageParts = {
             inlineData:{
@@ -51,13 +56,14 @@ const Modal = ({openModal, closeModal}) => {
         const response = await result.response;
         const text = response.text();
       
+        setResponse(text);
         console.log(text);
       }
 
 
     return (
         <dialog className="modal" ref={ref} onCancel={closeModal}>
-            <div className={imgSrc == null ? 'modalBox' : 'modalBox verifying'}>
+            <div className={loading == false ? 'modalBox' :  'modalBox blank'}>
                 <div className="modal-top">
                     <div className="modal-topText">
                         <h1>Take a picture</h1>
@@ -70,13 +76,11 @@ const Modal = ({openModal, closeModal}) => {
                     <button className="modal-bottom-verify" onClick={()=> run()}><p>verify</p> <img src={check} alt="check" /></button>
                 </div>
             </div>
-            <div className={imgSrc == null ? 'verifying-message' : 'verifying-message verifying'}>
-                <div className="verifying-messageText">
-                    <h1>Verifying with</h1>
-                    <img src={gemini} alt="gemini" />
-                </div>
-                <p>This may take a while</p>
-                <img src={imgSrc} alt="" />
+            <div className={loading == true && aiResponse == '' ? 'verifying-message' : 'verifying-message blank'}>
+                <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <div className={loading == true && aiResponse != '' ? 'verifying-message-not-verified' : 'verifying-message blank'}>
+                <p>{aiResponse}</p>
             </div>
         </dialog>
     );

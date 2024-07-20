@@ -11,11 +11,11 @@
     margin-bottom: 2rem;
 }
 
-.modalBox.verifying *{
+.modalBox.blank *{
     visibility: hidden;
 }
 
-.verifying-message{
+.verifying-message, .verifying-message-not-verified{
     visibility: hidden;
     position: absolute;
     height: 100%;
@@ -29,12 +29,32 @@
     align-items: center;
 }
 
+.verifying-message.blank{
+    visibility: none;
+}
+
 .verifying-message h1{
     font-size: 4rem;
     color: #3e3e3e;
 }
 
-.verifying-message.verifying{
+.verifying-message{
+    visibility: visible;
+}
+
+.verifying-message.blank{
+    visibility: hidden;
+}
+
+.verifying-message-not-verified{
+    visibility: visible;
+}
+
+.not-verified{
+    visibility: hidden;
+}
+
+.verifying-message.verifying.blank{
     visibility: visible;
 }
 
@@ -86,18 +106,6 @@
 
 .modal-bottom img{
     width: 3rem;
-}
-
-.modal-bottom-retake{
-    border: none;
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #cb2e2e;
-    border-radius: 1rem 0 0 1rem;
-    cursor: pointer;
 }
 
 .modal-bottom-verify{
