@@ -51,11 +51,11 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
         };
 
         console.log([imageParts])
-      
+
         const result = await model.generateContent([prompt, [imageParts]]);
         const response = await result.response;
         const text = response.text();
-      
+
         setResponse(text);
         console.log(text);
       }
