@@ -22,6 +22,9 @@ import { HallOfFame } from './pages/HallOfFame/HallOfFame';
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
 
 
+import { Form } from './pages/Form/Form';
+
+
 const LogInWrapper = () =>{
   return(
     <div>
@@ -61,6 +64,10 @@ const ErrorComponentsWrapper = () =>{
         {
           path: "/",
           element: <LogIn/>
+        },
+        {
+          path: '/form',
+          element: <Form/>
         }
       ]
     },

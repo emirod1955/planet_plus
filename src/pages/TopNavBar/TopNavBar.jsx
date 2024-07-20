@@ -23,7 +23,7 @@ const TopNavBar = () =>{
             </div>
             <aside className={isNavExpanded ? "navItems active" : "navItems"}>
                 <ul>
-                    <li><NavLink to="/dashboard" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>HOME</NavLink></li>
+                    <li><NavLink to="/dashboard" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>DASHBOARD</NavLink></li>
                     <li><NavLink to="/your-footprint" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>YOUR FOOTPRINT</NavLink></li>
                     <li><NavLink to="/badges" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>BADGES</NavLink></li>
                     <li><NavLink to="/hall-of-fame" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>HALL OF FAME</NavLink></li>

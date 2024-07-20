@@ -78,10 +78,10 @@ const Footprint = () =>{
                                 </div>
                             </div>
                             <div className="footprint-bottom">
-                                <TaskFootprint title="Recycle plastic" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
-                                <TaskFootprint title="Consume less energy" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={true}/>
-                                <TaskFootprint title="Don't use the car" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. " state={true}/>
-                                <TaskFootprint title="Recycle cardboard" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam." state={false}/>
+                                <TaskFootprint title="Recycle plastic" content="Recycling plastic contributes to your carbon footprint due to the energy-intensive processes involved in collecting, transporting, and reprocessing the plastic, which often rely on fossil fuels." state={false}/>
+                                <TaskFootprint title="Consume less energy" content="Using less energy lowers your carbon footprint by reducing the need for electricity and fuels, which are often produced from carbon-heavy sources. This cuts down greenhouse gas emissions, aiding climate change mitigation." state={true}/>
+                                <TaskFootprint title="Don't use the car" content="Not using a car reduces your carbon footprint by cutting down on the emissions of carbon dioxide and other greenhouse gases from burning fossil fuels. It also decreases the demand for fuel production, which has its own carbon costs, and reduces traffic congestion, leading to fewer emissions overall." state={true}/>
+                                <TaskFootprint title="Recycle cardboard" content="Recycling cardboard contributes to your carbon footprint because the collection, transportation, and processing of cardboard require energy, often from fossil fuels. However, it is still more eco-friendly than producing new cardboard from raw materials, as it reduces deforestation and the energy needed for production." state={false}/>
                             </div>
                         </div>
                 </div>

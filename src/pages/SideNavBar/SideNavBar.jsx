@@ -10,8 +10,6 @@ import foot from './assets/foot.svg'
 import trophy from './assets/trophy.svg'
 import ranking from './assets/ranking.svg'
 
-import profile from './assets/profile.png'
-
 import instagram from './assets/instagram.svg'
 import twitter from './assets/twitter.svg'
 
@@ -41,7 +39,7 @@ const SideNavBar = () =>{
         <div className='sideNavBar'>
             <ul>
                 <li className='sideNavBar-profile'><img id='sideNavBar-profilePhoto' src={userDetails.picture} alt="photo" /><p>{userDetails.name}</p></li>
-                <li><NavLink to='/dashboard'><img src={home} alt="Home" />Home</NavLink></li>
+                <li><NavLink to='/dashboard'><img src={home} alt="Home" />Dashboard</NavLink></li>
                 <li><NavLink to='/your-footprint'><img src={foot} alt="Your footprint" />Your footprint</NavLink></li>
                 <li><NavLink to='/badges'><img src={trophy} alt="Badges" />Badges</NavLink></li>
                 <li><NavLink to='/hall-of-fame'><img src={ranking} alt="Hall of fame" />Hall of fame</NavLink></li>
