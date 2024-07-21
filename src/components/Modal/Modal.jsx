@@ -50,14 +50,11 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
             },
         };
 
-        console.log([imageParts])
-
         const result = await model.generateContent([prompt, [imageParts]]);
         const response = await result.response;
         const text = response.text();
 
         setResponse(text);
-        console.log(text);
       }
 
 
@@ -80,7 +77,15 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
                 <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
             <div className={loading == true && aiResponse != '' ? 'verifying-message-not-verified' : 'verifying-message blank'}>
-                <p>{aiResponse}</p>
+                { aiResponse == 'Yes.' ? 
+                    <div className="TaskVerified">
+                        <p>Verified</p>
+                    </div> 
+                    :
+                    <div className="TaskNotVerified">
+                        <p>Not verified</p>
+                    </div>
+                }
             </div>
         </dialog>
     );

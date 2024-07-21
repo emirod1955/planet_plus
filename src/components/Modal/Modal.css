@@ -131,6 +131,23 @@
     width: 100%;
 }
 
+.TaskVerified, .TaskNotVerified{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.TaskVerified p{
+    color: #159234;
+}
+
+.TaskNotVerified p{
+    color: #921515;
+}
+
 @media (max-width: 700px){
     .modal{
         padding: 2rem;
