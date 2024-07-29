@@ -1,5 +1,8 @@
 //import react
-import { useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+
+//import context
+import { ResponseContext } from "../../pages/Footprint/context";
 
 //import webcam
 import Webcam from "react-webcam";
@@ -11,18 +14,21 @@ import './assets/loading.css'
 //import img
 import check from '../../assets/img/check.svg'
 import back from './assets/back.svg'
-import gemini from './assets/gemini.png'
+import verifiedImg from './assets/verifiedImg.svg'
+import notVerifiedImg from './assets/notVerifiedImg.svg'
 
 //import gemini
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI('AIzaSyAfcda0jwF-bxh_wvfjKmxYeIIIbOCpizQ');
 
-const Modal = ({openModal, closeModal, taskTitle}) => {
+const Modal = ({openModal, closeModal, taskTitle, unique}) => {
     const [aiResponse, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
 
     const webcamRef = useRef(null);
     const ref = useRef();
+
+    const { handleResponse } = useContext(ResponseContext)
 
     useEffect(() => {
         if (openModal) {
@@ -41,7 +47,7 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
         // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-        const prompt = `say me that if the task: ${taskTitle}, can be seen in the photo? Answer with yes or no only`;
+        const prompt = `say me that if the task: (${taskTitle}), can be seen in the photo? Answer with "true" or no "false" ONLY`;
       
         const imageParts = {
             inlineData:{
@@ -55,8 +61,18 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
         const text = response.text();
 
         setResponse(text);
+        handleResponse(text, unique);
       }
 
+    const handleVerified = () =>{
+        closeModal()
+    }
+
+    const handleNotVerified = () =>{
+        closeModal()
+        setLoading(false)
+        setResponse('');
+    }
 
     return (
         <dialog className="modal" ref={ref} onCancel={closeModal}>
@@ -77,18 +93,28 @@ const Modal = ({openModal, closeModal, taskTitle}) => {
                 <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
             <div className={loading == true && aiResponse != '' ? 'verifying-message-not-verified' : 'verifying-message blank'}>
-                { aiResponse == 'Yes.' ? 
+                { aiResponse == 'true' ? 
                     <div className="TaskVerified">
-                        <p>Verified</p>
+                        <div className="TaskVerified-top">
+                            <div className="iconImgBox"><img src={verifiedImg} alt="check" /></div>
+                            <h2>Verified Task</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam.</p>
+                        </div>
+                        <input type="button" value="Nice!" onClick={() => handleVerified()}/>
                     </div> 
                     :
                     <div className="TaskNotVerified">
-                        <p>Not verified</p>
+                        <div className="TaskVerified-top">
+                            <div className="iconImgBox"><img src={notVerifiedImg} alt="check" /></div>
+                            <h2>Unverified Task</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam.</p>
+                        </div>
+                        <input type="button" value="Go Back" onClick={() => handleNotVerified()}/>
                     </div>
                 }
             </div>
         </dialog>
     );
-}
+};
 
 export {Modal}

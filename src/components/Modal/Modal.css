@@ -135,17 +135,62 @@
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+}
+
+.iconImgBox{
+    background-color: #F2F4FA;
+    border-radius: 50%;
+    width: 30rem;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconImgBox img{
+    max-width: 15rem;
+}
+
+.verifying-message-not-verified input{
+    border-radius: 5rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 2rem;
+    border: none;
+    width: 30rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
+.TaskVerified input{
+    background-color: #2EE2B1;
+}
+
+.TaskNotVerified input{
+    background-color: #f98585;
+}
+
+.TaskVerified-top{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
+}
+
+.verifying-message-not-verified h2{
     font-size: 3rem;
+    color: #1e1e1e;
 }
 
-.TaskVerified p{
-    color: #159234;
-}
-
-.TaskNotVerified p{
-    color: #921515;
+.verifying-message-not-verified p{
+    max-width: 80%;
+    color: #3e3e3e;
+    text-align: center;
 }
 
 @media (max-width: 700px){
@@ -155,5 +200,27 @@
 
     .modal-topText{
         width: 80%;
+    }
+
+    .iconImgBox{
+        width: 20rem;
+        height: 20rem;
+    }
+
+    .iconImgBox img{
+        max-width: 10rem;
+    }
+
+    .verifying-message-not-verified h2{
+        font-size: 2.5rem;
+        color: #1e1e1e;
+    }
+    
+    .verifying-message-not-verified p{
+        font-size: 1.5rem;
+    }
+
+    .TaskVerified-top{
+        gap: 1rem;
     }
 }
