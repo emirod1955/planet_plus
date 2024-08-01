@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 
 //import context
-import { ResponseContext } from "../../pages/Footprint/context";
+import { ResponseContext } from "../../context";
 
 //import webcam
 import Webcam from "react-webcam";
@@ -28,7 +28,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
     const webcamRef = useRef(null);
     const ref = useRef();
 
-    const { handleResponse } = useContext(ResponseContext)
+    const { handleResponse, response } = useContext(ResponseContext)
 
     useEffect(() => {
         if (openModal) {
@@ -47,7 +47,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
         // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-        const prompt = `say me that if the task: (${taskTitle}), can be seen in the photo? Answer with "true" or no "false" ONLY`;
+        const prompt = `say me that if the task: (${taskTitle}), can be seen in the photo? Answer with 'true' or 'false' ONLY`;
       
         const imageParts = {
             inlineData:{
@@ -93,7 +93,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                 <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
             <div className={loading == true && aiResponse != '' ? 'verifying-message-not-verified' : 'verifying-message blank'}>
-                { aiResponse == 'true' ? 
+                { aiResponse == 'true' || response[unique] == 'true' ? 
                     <div className="TaskVerified">
                         <div className="TaskVerified-top">
                             <div className="iconImgBox"><img src={verifiedImg} alt="check" /></div>

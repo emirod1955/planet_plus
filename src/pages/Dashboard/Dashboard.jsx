@@ -1,12 +1,6 @@
 //import react
 import { useEffect, useState } from "react";
 
-//import react router
-import { useNavigate } from "react-router-dom";
-
-//import cookies
-import Cookies from "js-cookie";
-
 //import components
 import {HomeTask} from './Task/Task'
 
@@ -25,28 +19,9 @@ import chimney from './assets/buttons/chimney.svg'
 import './Dashboard.css'
 
 const Dashboard = () =>{
-    const navigate = useNavigate();
-    const [userDetails, setUserDetails] = useState({});
-
-    const getUserDetails = async (accessToken) => {
-        const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`);
-        const data = await response.json();
-        setUserDetails(data);
-    };
-
-    useEffect(() => {
-        const accessToken = Cookies.get("access_token");
-        if (!accessToken) {
-            navigate("/");
-        }
-
-        getUserDetails(accessToken);
-    }, [navigate]);
 
     return(
-        <>
-            {userDetails ? (
-                <div className='home'>
+            <div className='home'>
                 <section className='stageBox'>
                     <img src={stage} alt="" />
                 </section>
@@ -76,10 +51,10 @@ const Dashboard = () =>{
                                 <img src={clock} alt="clock" />
                             </div>
                             <div className='taskSide-bottom'>
-                                <HomeTask title="Recycle plastic" state={false}/>
-                                <HomeTask title="Consume less energy" state={true}/>
-                                <HomeTask title="Don't use the car" state={true}/>
-                                <HomeTask title="Recycle cardboard" state={false}/>
+                                <HomeTask unique={0}/>
+                                <HomeTask unique={1}/>
+                                <HomeTask unique={2}/>
+                                <HomeTask unique={3}/>
                             </div>
                         </div>
                     </div>
@@ -92,12 +67,6 @@ const Dashboard = () =>{
                     </div>
                 </aside>
             </div>
-            ) : (
-                <div>
-                    <h1>Loading...</h1>
-                </div>
-            )}
-        </>
     );
 }
 

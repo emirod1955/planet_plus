@@ -1,12 +1,17 @@
 //import react
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom/client'
 
+//import cookies
+import Cookies from "js-cookie";
+
 //import react router
-import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-router-dom";
 
 //import general styles
 import './assets/index.css'
+
+import { ResponseContext } from './context';
 
 //import components
 import { TopNavBarHome } from './pages/TopNavBarHome/TopNavBarHome';
@@ -24,24 +29,11 @@ import { HallOfFame } from './pages/HallOfFame/HallOfFame';
 
 import { Form } from './pages/Form/Form';
 
-
 const LogInWrapper = () =>{
   return(
     <div>
       <TopNavBarHome/>
       <Outlet/>
-    </div>
-  );
-}
-
-const ComponentsWrapper = () =>{
-  return(
-    <div>
-      <TopNavBar/>
-      <div className='desktop-content'>
-        <SideNavBar/>
-        <Outlet/>
-      </div>
     </div>
   );
 }
@@ -52,6 +44,50 @@ const ErrorComponentsWrapper = () =>{
       <TopNavBarHome/>
       <ErrorPage/>
     </div>
+  );
+}
+
+const ComponentsWrapper = () =>{
+  const navigate = useNavigate();
+  const [userDetails, setUserDetails] = useState({});
+
+  const getUserDetails = async (accessToken) => {
+    const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`);
+    const data = await response.json();
+    setUserDetails(data);
+  };
+
+  useEffect(() => {
+    const accessToken = Cookies.get("access_token");
+    if (!accessToken) {
+      navigate("/");
+    }
+
+    getUserDetails(accessToken);
+  }, [navigate]);
+
+  const [response, setResponse] = useState(['false', 'false', 'false', 'false'])
+
+  const handleResponse = (res, pos) =>{
+    setResponse(response, response[pos] = res)
+  }
+
+  return(
+    <>
+      {userDetails ? (
+        <ResponseContext.Provider value={{response, handleResponse}}>
+          <TopNavBar/>
+          <div className='desktop-content'>
+            <SideNavBar/>
+            <Outlet/>
+          </div>
+        </ResponseContext.Provider>
+      ) : (
+        <div>
+            <h1>Loading...</h1>
+        </div>
+      )}
+    </>
   );
 }
 
