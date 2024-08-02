@@ -21,6 +21,21 @@ import notVerifiedImg from './assets/notVerifiedImg.svg'
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI('AIzaSyAfcda0jwF-bxh_wvfjKmxYeIIIbOCpizQ');
 
+function stringToBoolean(str) {
+    if (typeof str === 'string') {
+
+      const cleanedStr = str.trim().toLowerCase();
+
+      if (cleanedStr === 'true') {
+        return true;
+      } else if (cleanedStr === 'false') {
+        return false;
+      }
+    }
+    
+    return false;
+  }
+
 const Modal = ({openModal, closeModal, taskTitle, unique}) => {
     const [aiResponse, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
@@ -47,7 +62,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
         // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-        const prompt = `say me that if the task: (${taskTitle}), can be seen in the photo? Answer with 'true' or 'false' ONLY`;
+        const prompt = `can you detect that the activity: (${taskTitle}) can be supposed with the following image? answer with 'true' or 'false' ONLY`;
       
         const imageParts = {
             inlineData:{
@@ -60,8 +75,10 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
         const response = await result.response;
         const text = response.text();
 
+        console.log(text)
+
         setResponse(text);
-        handleResponse(text, unique);
+        handleResponse(stringToBoolean(text) , unique);
       }
 
     const handleVerified = () =>{
@@ -93,7 +110,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                 <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
             <div className={loading == true && aiResponse != '' ? 'verifying-message-not-verified' : 'verifying-message blank'}>
-                { aiResponse == 'true' || response[unique] == 'true' ? 
+                { aiResponse == 'true' || response[unique] == true ? 
                     <div className="TaskVerified">
                         <div className="TaskVerified-top">
                             <div className="iconImgBox"><img src={verifiedImg} alt="check" /></div>

@@ -1,8 +1,11 @@
 //import react
-import { useEffect, useState } from "react";
+import { useContext } from 'react'
 
 //import components
 import {HomeTask} from './Task/Task'
+
+//import context
+import { ResponseContext } from '../../context'
 
 //import img
 import stage from './assets/stage.png'
@@ -19,6 +22,21 @@ import chimney from './assets/buttons/chimney.svg'
 import './Dashboard.css'
 
 const Dashboard = () =>{
+    const { actualCount, trueCount } = useContext(ResponseContext)
+
+    const getStyle = () => {
+        if (actualCount == 0) {
+            return { width: '0%' };
+        } else if (actualCount == 1){
+            return { width: '25%' };
+        } else if (actualCount == 2){
+            return { width: '50%' };
+        } else if (actualCount == 3){
+            return { width: '75%' };
+        } else if (actualCount == 4){
+            return { width: '100%' };
+        }
+    };
 
     return(
             <div className='home'>
@@ -27,7 +45,7 @@ const Dashboard = () =>{
                 </section>
                 <aside className='homeSubMenu'>
                     <div className='homeSubMenu-top'>
-                        <div className='progressSide'>
+                    <div className='progressSide'>
                             <div className='progressSide-top'>
                                 <div className='progressSide-topText'>
                                     <h1>Hurrah!</h1>
@@ -38,10 +56,10 @@ const Dashboard = () =>{
                             <div className='progressSide-bottom'>
                                 <div className='progressSide-bottomText'>
                                     <img src={check} alt="check" />
-                                    <p>20 Tasks completed</p>
+                                    <p>{trueCount} Tasks completed</p>
                                 </div>
                                 <div className='progressBar'>
-                                    <div className='progressBar-progress'></div>
+                                    <div style={getStyle()} className='progressBar-progress'></div>
                                 </div>
                             </div>
                         </div>

@@ -66,16 +66,24 @@ const ComponentsWrapper = () =>{
     getUserDetails(accessToken);
   }, [navigate]);
 
-  const [response, setResponse] = useState(['false', 'false', 'false', 'false'])
+  const [response, setResponse] = useState([false, false, false, false])
+  const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
+  const [trueCount, setTrueCount] = useState(4)
 
   const handleResponse = (res, pos) =>{
     setResponse(response, response[pos] = res)
+    setActualeCount(response.filter(item => item === true).length)
+    if(res === true){
+        setTrueCount(prevCount => prevCount + 1)
+    }
+    // if res === true settruecount + 1 ....  chatgpt comment; setCount(prevCount => prevCount + 1);
+    console.log(response)
   }
 
   return(
     <>
       {userDetails ? (
-        <ResponseContext.Provider value={{response, handleResponse}}>
+        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount}}>
           <TopNavBar/>
           <div className='desktop-content'>
             <SideNavBar/>

@@ -27,11 +27,11 @@ const TaskFootprint = ({unique}) => {
                 <p className='TaskFootprint-content'>{data.task[unique].details}</p>
                 <div className='TaskFootprint-bottom'>
                     <button style={{
-                            backgroundColor : response[unique] == 'true' ? '#4bcc31' : '#3170cc',
-                            cursor : response[unique] == 'true' ? 'auto' : 'pointer',
+                            backgroundColor : response[unique] === true ? '#00ba00' : '#3170cc',
+                            cursor : response[unique] === true ? 'auto' : 'pointer',
                         }} 
-                        onClick={() => response[unique] == 'true' ? setModal(false) : setModal(true)}>
-                        <p style={{display : response[unique] == 'true' ? 'none' : 'block'}}>verify</p>
+                        onClick={() => response[unique] === true ? setModal(false) : setModal(true)}>
+                        <p style={{display : response[unique] === true ? 'none' : 'block'}}>verify</p>
                         <img src={check} alt="check" />
                     </button>
                 </div>

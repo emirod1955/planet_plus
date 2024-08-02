@@ -22,8 +22,8 @@ const HomeTask = ({unique}) =>{
 
     return (
         <div className="task">
-            <p style={{textDecoration : response[unique] == 'true' ? 'line-through' : 'none'}}>{data.task[unique].title}</p>
-            {response[unique] == 'true' ? <img id='checkImgTask' src={Check} alt="check"/> : <span onClick={() => setModal(true)}></span>}
+            <p style={{textDecoration : response[unique] === true ? 'line-through' : 'none'}}>{data.task[unique].title}</p>
+            {response[unique] === true ? <img id='checkImgTask' src={Check} alt="check"/> : <span onClick={() => setModal(true)}></span>}
             <Modal openModal={modal} closeModal={() => setModal(false)} taskTitle={data.task[unique].title} unique={unique}/>
         </div>
     );
