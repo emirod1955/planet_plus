@@ -9,7 +9,7 @@ import Webcam from "react-webcam";
 
 //import styles
 import './Modal.css'
-import './assets/loading.css'
+import '../../assets/loading.css'
 
 //import img
 import check from '../../assets/img/check.svg'
@@ -53,7 +53,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
         }
     }, [openModal]);
 
-    async function run() {
+    const run = async() => {
         setLoading(true)
         setResponse('');
 

@@ -1,3 +1,9 @@
+//import react
+import { useContext } from "react";
+
+//import context
+import { ResponseContext } from "../../context";
+
 //impor charts
 import { StyledEngineProvider } from "@mui/material/styles";
 import { LineChart } from '@mui/x-charts/LineChart';
@@ -7,6 +13,7 @@ import { TaskFootprint } from "./TaskFootprint/TaskFootprint";
 
 //import styles
 import './Footprint.css'
+import '../../assets/loading.css'
 
 const Graph = () =>{
     return(
@@ -32,13 +39,20 @@ const Graph = () =>{
 
 const Footprint = () =>{
 
+    const { overview } = useContext(ResponseContext)
+
     return(
                     <div className="footprint">
                             <div className="footprintBox">
                                 <div className="footprint-top">
                                     <div className="footprintText-top">
                                         <h1>Overview</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
+                                        {overview == '' ?
+                                        <div className="overviewLoading">
+                                            <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                         </div>
+                                         : <p>{overview}</p> 
+                                        }
                                     </div>
                                     <div className="footprintGraph-bottom">
                                         <div className="footprintText-bottom">

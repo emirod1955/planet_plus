@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom/client'
 //import cookies
 import Cookies from "js-cookie";
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
+const genAI = new GoogleGenerativeAI('AIzaSyAfcda0jwF-bxh_wvfjKmxYeIIIbOCpizQ');
+
 //import react router
 import { createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-router-dom";
 
@@ -25,7 +28,6 @@ import { Badges } from './pages/Badges/Badges';
 import { HallOfFame } from './pages/HallOfFame/HallOfFame';
 
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
-
 
 import { Form } from './pages/Form/Form';
 
@@ -69,6 +71,26 @@ const ComponentsWrapper = () =>{
   const [response, setResponse] = useState([false, false, false, false])
   const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
   const [trueCount, setTrueCount] = useState(4)
+  const [overview, setOverview] = useState('')
+
+  useEffect(() => {
+    const run = async() => {
+        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      
+        const prompt = `I did ${trueCount} tasks to contribute to my carbon footprint, motivate me to do more! IN A PARAGRAPH. Don't forget to mention how many tasks I did`;
+    
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+    
+        console.log(text)
+        setOverview(text)
+    }
+
+    run()
+
+  }, [trueCount]);
 
   const handleResponse = (res, pos) =>{
     setResponse(response, response[pos] = res)
@@ -76,14 +98,13 @@ const ComponentsWrapper = () =>{
     if(res === true){
         setTrueCount(prevCount => prevCount + 1)
     }
-    // if res === true settruecount + 1 ....  chatgpt comment; setCount(prevCount => prevCount + 1);
     console.log(response)
   }
 
   return(
     <>
       {userDetails ? (
-        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount}}>
+        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount, overview}}>
           <TopNavBar/>
           <div className='desktop-content'>
             <SideNavBar/>
