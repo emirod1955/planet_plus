@@ -16,14 +16,16 @@ import './Footprint.css'
 import '../../assets/loading.css'
 
 const Graph = () =>{
+    const { trueCount } = useContext(ResponseContext)
+
     return(
         <StyledEngineProvider injectFirst>
             <div className="graphBox">
                 <LineChart
                     xAxis={[{ data: [1, 3, 5, 8, 10] }]}
                     series={[
-                        { curve: "natural", data: [-1, 2, 6, 3, 9.3], color: '#7BAC23'},
-                        { curve: "natural", data: [6, 7, 9.5, 4, 6], color: '#666666'}
+                        { curve: "natural", data: [-1, 2, 5, 3, trueCount], color: '#7BAC23'},
+                        { curve: "natural", data: [2, 1, 4, 1, 2], color: '#666666'}
                     ]}
                     axisHighlight={{
                         x: 'none', 

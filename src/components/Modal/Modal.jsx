@@ -43,7 +43,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
     const webcamRef = useRef(null);
     const ref = useRef();
 
-    const { handleResponse, response } = useContext(ResponseContext)
+    const { handleResponse, response, AllTaskTrue } = useContext(ResponseContext)
 
     useEffect(() => {
         if (openModal) {
@@ -82,7 +82,14 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
       }
 
     const handleVerified = () =>{
-        closeModal()
+        if (response.every(state => state === true)) {
+            setResponse('')
+            setLoading(false)
+            AllTaskTrue()
+            closeModal()
+        } else {
+            closeModal()
+        }
     }
 
     const handleNotVerified = () =>{

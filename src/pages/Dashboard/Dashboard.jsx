@@ -34,7 +34,9 @@ const Dashboard = () =>{
         } else if (actualCount == 3){
             return { width: '75%' };
         } else if (actualCount == 4){
-            return { width: '100%' };
+            return { width: '0%' };
+        } else{
+            return { width: '0%' };
         }
     };
 

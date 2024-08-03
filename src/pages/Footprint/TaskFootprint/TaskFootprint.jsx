@@ -13,18 +13,15 @@ import check from '../../../assets/img/check.svg'
 //import styles
 import './TaskFootprint.css'
 
-//import data
-import data from '../../../types/data.json'
-
 const TaskFootprint = ({unique}) => {
     const [modal, setModal] = useState(false)
 
-    const { response } = useContext(ResponseContext)
+    const { response, tasks } = useContext(ResponseContext)
 
     return(
             <div className='TaskFootprint'>
-                <h3 >{data.task[unique].title}</h3>
-                <p className='TaskFootprint-content'>{data.task[unique].details}</p>
+                <h3 >{tasks[unique].task}</h3>
+                <p className='TaskFootprint-content'>{tasks[unique].photo_instructions}</p>
                 <div className='TaskFootprint-bottom'>
                     <button style={{
                             backgroundColor : response[unique] === true ? '#00ba00' : '#3170cc',
@@ -35,7 +32,7 @@ const TaskFootprint = ({unique}) => {
                         <img src={check} alt="check" />
                     </button>
                 </div>
-                <Modal openModal={modal} closeModal={() => setModal(false)} taskTitle={data.task[unique].title} unique={unique}/>
+                <Modal openModal={modal} closeModal={() => setModal(false)} taskTitle={tasks[unique].task} unique={unique}/>
             </div>
     );
 }
