@@ -1,5 +1,5 @@
 //import react
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useEffect, useRef, useState, useContext, useCallback } from "react";
 
 //import context
 import { ResponseContext } from "../../context";
@@ -16,6 +16,7 @@ import check from '../../assets/img/check.svg'
 import back from './assets/back.svg'
 import verifiedImg from './assets/verifiedImg.svg'
 import notVerifiedImg from './assets/notVerifiedImg.svg'
+import turn from './assets/refresh.svg'
 
 //import gemini
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -52,6 +53,19 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
             ref.current?.close();
         }
     }, [openModal]);
+
+    const FACING_MODE_USER = "user";
+    const FACING_MODE_ENVIRONMENT = "environment";
+
+    const [facingMode, setFacingMode] = React.useState(FACING_MODE_USER);
+
+    const handleFace = React.useCallback(() => {
+        setFacingMode((prevState) =>
+          prevState === FACING_MODE_USER
+            ? FACING_MODE_ENVIRONMENT
+            : FACING_MODE_USER
+        );
+      }, []);
 
     const run = async() => {
         setLoading(true)
@@ -108,8 +122,9 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                     </div>
                     <button onClick={closeModal}><img src={back} alt="go back" /></button>
                 </div>
-                <Webcam className="modalVideo" ref={webcamRef}/>
+                    <Webcam className="modalVideo" ref={webcamRef} audio={false} videoConstraints={{facingMode: facingMode}}/>
                 <div className="modal-bottom">
+                    <button onClick={handleFace} className="modal-bottom-turn"><img src={turn} alt="turn camera face" /></button>
                     <button className="modal-bottom-verify" onClick={()=> run()}><p>verify</p> <img src={check} alt="check" /></button>
                 </div>
             </div>

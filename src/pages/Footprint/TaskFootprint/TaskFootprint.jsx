@@ -20,8 +20,10 @@ const TaskFootprint = ({unique}) => {
 
     return(
             <div className='TaskFootprint'>
-                <h3 >{tasks[unique].task}</h3>
-                <p className='TaskFootprint-content'>{tasks[unique].photo_instructions}</p>
+                <div className='TaskFootprint-top'>
+                    <h3 >{tasks[unique].task}</h3>
+                    <p className='TaskFootprint-content'>{tasks[unique].photo_instructions}</p>
+                </div>
                 <div className='TaskFootprint-bottom'>
                     <button style={{
                             backgroundColor : response[unique] === true ? '#00ba00' : '#3170cc',

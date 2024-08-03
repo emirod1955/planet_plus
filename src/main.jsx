@@ -72,7 +72,7 @@ const ComponentsWrapper = () =>{
 
   const [response, setResponse] = useState([true, false, true, true])
   const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
-  const [trueCount, setTrueCount] = useState(4)
+  const [trueCount, setTrueCount] = useState(3)
   const [overview, setOverview] = useState('')
   const [tasks, setTasks] = useState(loading)
 
@@ -81,11 +81,13 @@ const ComponentsWrapper = () =>{
         // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-        const prompt = `Tell me 4 smalls tasks that you can verify with a photo without a caption that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
+        const prompt = `Tell me 4 smalls tasks that you can verify with a photo that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
     
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
+
+        console.log(text)
     
         setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
     }
@@ -120,7 +122,6 @@ const ComponentsWrapper = () =>{
   }
 
   const AllTaskTrue = async() => {
-    setResponse([false, false, false, false])
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
@@ -132,6 +133,7 @@ const ComponentsWrapper = () =>{
     const text = response.text();
 
     setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
+    setResponse([false, false, false, false])
     console.loh(tasks)
   }
 

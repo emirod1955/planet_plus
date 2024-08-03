@@ -1,6 +1,6 @@
 .TaskFootprint{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     gap: .5rem;
     width: 50rem;
@@ -8,6 +8,12 @@
     padding: 2rem;
     border-radius: 1rem;
     background-color: #f3f3f3;
+}
+
+.TaskFootprint-top{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .TaskFootprint-bottom{
