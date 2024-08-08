@@ -1,5 +1,5 @@
 //import react
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 //import components
 import {HomeTask} from './Task/Task'
@@ -13,10 +13,6 @@ import stage from './assets/stage.png'
 import medal from './assets/medal.png'
 import check from '../../assets/img/check.svg'
 import clock from './assets/clock.svg'
-
-import clean from './assets/buttons/clean.svg'
-import fish from './assets/buttons/fish.svg'
-import chimney from './assets/buttons/chimney.svg'
 
 //import styles
 import './Dashboard.css'
@@ -82,13 +78,6 @@ const Dashboard = () =>{
                                 <HomeTask unique={2}/>
                                 <HomeTask unique={3}/>
                             </div>
-                        </div>
-                    </div>
-                    <div className='homeSubMenu-bottom'>
-                        <div className='bottomButtons-box'>
-                            <button type="button"><p>Clean</p><img src={clean} alt="clean" /></button>
-                            <button type="button"><p>Fish</p><img src={fish} alt="fish" /></button>
-                            <button type="button"><p>Stove</p><img src={chimney} alt="chimney" /></button>
                         </div>
                     </div>
                 </aside>

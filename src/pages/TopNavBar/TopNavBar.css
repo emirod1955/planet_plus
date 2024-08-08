@@ -1,5 +1,5 @@
 .topNav img{
-    width: 3rem;
+    display: none;
 }
 
 .topNav{
@@ -12,7 +12,7 @@
     width: 100%;
 }
 
-.topNav img, .navItems{
+.navItems{
     display: none;
 }
 
@@ -25,7 +25,8 @@
 @media (max-width: 1150px){
 
     .topNav img{
-        display: flex;
+        display: block;
+        width: 3rem;
     }
 
     .navItems.active{
@@ -34,7 +35,16 @@
         justify-content: space-around;
         position: absolute;
         width: 100vw;
+        height: calc(100vh - 5rem);
         z-index: 1;
+    }
+
+    .poweredGemini-topNav img{
+        width: 10rem;
+    }
+
+    .poweredGemini-topNav{
+        color: #fff;
     }
 
     .navItems{
@@ -49,7 +59,6 @@
         gap: 3rem;
         font-weight: 900;
         font-size: 3rem;
-        
     }
 
     .navItems ul a.active{
@@ -63,15 +72,5 @@
     ul li a{
         color: #fff;
         text-decoration: none;
-    }
-
-    .navItems img{
-        width: 3rem;
-    }
-
-    .topNav-networks{
-        display: flex;
-        justify-content: center;
-        gap: 5rem;
     }
 }

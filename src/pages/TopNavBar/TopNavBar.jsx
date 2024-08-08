@@ -2,15 +2,14 @@
 import { useState } from 'react';
 
 //import react router
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 //import styles
 import './TopNavBar.css';
 
 //import img
 import menu from './assets/menu-burger.svg'
-import twitter from './assets/twitter.svg'
-import instagram from './assets/instagram.svg'
+import gemini from './assets/gemini.png'
 
 const TopNavBar = () =>{
     const [isNavExpanded,  setIsNavExpanded] = useState(false);
@@ -25,12 +24,12 @@ const TopNavBar = () =>{
                 <ul>
                     <li><NavLink to="/dashboard" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>DASHBOARD</NavLink></li>
                     <li><NavLink to="/your-footprint" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>YOUR FOOTPRINT</NavLink></li>
-                    <li><NavLink to="/badges" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>BADGES</NavLink></li>
+                    <li><NavLink to="/awards" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>AWARDS</NavLink></li>
                     <li><NavLink to="/hall-of-fame" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>HALL OF FAME</NavLink></li>
                 </ul>
-                <div className='topNav-networks'>
-                    <Link to="https://www.instagram.com/" target='_blank'><img src={instagram} alt="instagram"/></Link>
-                    <Link to="https://x.com/" target='_blank'><img src={twitter} alt="twitter" /></Link>
+                <div className='poweredGemini-topNav'>
+                    <p>powered by</p>
+                    <img src={gemini} alt="gemini" />
                 </div>
             </aside>
         </nav>

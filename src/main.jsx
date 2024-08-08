@@ -31,7 +31,7 @@ import { SideNavBar } from './pages/SideNavBar/SideNavBar';
 import { LogIn } from './pages/LogIn/LogIn';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Footprint } from './pages/Footprint/Footprint';
-import { Badges } from './pages/Badges/Badges';
+import { Awards } from './pages/Awards/Awards';
 import { HallOfFame } from './pages/HallOfFame/HallOfFame';
 
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
@@ -286,8 +286,8 @@ const ComponentsWrapper = () =>{
           element: <Footprint />
         },
         {
-          path: '/badges',
-          element: <Badges/>
+          path: '/awards',
+          element: <Awards/>
         },
         {
           path: '/hall-of-fame',

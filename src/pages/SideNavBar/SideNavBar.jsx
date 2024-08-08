@@ -1,5 +1,5 @@
 //import react
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 
 //import cookies
 import Cookies from "js-cookie";
@@ -13,8 +13,7 @@ import foot from './assets/foot.svg'
 import trophy from './assets/trophy.svg'
 import ranking from './assets/ranking.svg'
 
-import instagram from './assets/instagram.svg'
-import twitter from './assets/twitter.svg'
+import gemini from './assets/gemini.png'
 
 //import styles
 import './SideNavBar.css'
@@ -44,12 +43,12 @@ const SideNavBar = () =>{
                 <li className='sideNavBar-profile'><img id='sideNavBar-profilePhoto' src={userDetails.picture} alt="photo" /><p>{userDetails.name}</p></li>
                 <li><NavLink to='/dashboard'><img src={home} alt="Home" />Dashboard</NavLink></li>
                 <li><NavLink to='/your-footprint'><img src={foot} alt="Your footprint" />Your footprint</NavLink></li>
-                <li><NavLink to='/badges'><img src={trophy} alt="Badges" />Badges</NavLink></li>
+                <li><NavLink to='/awards'><img src={trophy} alt="Awards" />Awards</NavLink></li>
                 <li><NavLink to='/hall-of-fame'><img src={ranking} alt="Hall of fame" />Hall of fame</NavLink></li>
             </ul>
-            <div className='sideNavBar-social'>
-                <Link to='https://www.instagram.com/' target='_blank'><img src={instagram} alt="instagram" /></Link>
-                <Link to='https://x.com/' target='_blank'><img src={twitter} alt="twitter" /></Link>
+            <div className='poweredGemini'>
+                <p>powered by</p>
+                <img src={gemini} alt="gemini" />
             </div>
         </div>
     );
