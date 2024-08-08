@@ -51,7 +51,8 @@ const LogIn = () =>{
             <div className='LogIn-left'>
                 <div className="LogIn-leftText">
                   <h1>Together for a <br /><span id='LogIn-leftHighlight'>Greener</span><br />Tomorrow</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam. Duis congue neque quam. Proin maximus leo a mauris posuere, sed iaculis dui efficitur. Nulla facilisi. Mauris quis enim ac justo interdum egestas ut ac justo. Donec lacus felis, molestie non feugiat nec, hendrerit ullamcorper libero.</p>
+                  <p>Log in with Google to continue your journey towards a greener future. Discover simple, impactful tasks, powered by Gemini AI, that help you reduce your carbon footprint, one step at a time.</p>
+                  <p><span id="LogIn-leftText-black">Not a member yet?</span> <span id="LogIn-leftText-blue" onClick={handleClick}>Join us today</span> and start making a difference!</p>
                   <div className='LogIn-diagram'>
                       <img src={hand} alt="hand" />
                       <p>&rarr;</p>

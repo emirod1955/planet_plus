@@ -24,7 +24,7 @@
 }
 
 .LogIn-left h1 span{
-    color: #3A8D25; 
+    color: #378423; 
     font-size: 9rem;
 }
 
@@ -62,6 +62,16 @@
     gap: 1rem;
     cursor: pointer;
     color: #000;
+    background-color: #fff;
+}
+
+#LogIn-leftText-black{
+    font-weight: 700;
+}
+
+#LogIn-leftText-blue{
+    color: #005e8b;
+    cursor: pointer;
 }
 
 .LogIn-leftButton button img{
@@ -106,12 +116,19 @@
     }
 
     .LogIn-right{
-        display: none;
+        width: 100vw;
+        height: calc(100vh - 5rem);
+        position: absolute;
+        z-index: -1;
     }
 
     .LogIn-leftText{
         display: flex;
         flex-direction: column;
         gap: 3rem;
+    }
+
+    .LogIn-diagram{
+        display: none;
     }
 }

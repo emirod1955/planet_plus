@@ -1,6 +1,5 @@
 .topNavHome{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 5rem;
     padding: 0 2rem;
@@ -14,11 +13,6 @@
     color: #245892;
 }
 
-.topNavHome-social{
-    display: flex;
-    gap: 3rem;
-}
-
-.topNavHome-social img{
-    width: 2.5rem;
+.topNavHome a{
+    text-decoration: none;
 }
