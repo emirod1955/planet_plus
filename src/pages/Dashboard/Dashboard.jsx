@@ -1,5 +1,5 @@
 //import react
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 //import components
 import {HomeTask} from './Task/Task'
@@ -25,17 +25,23 @@ const Dashboard = () =>{
     const { actualCount, trueCount } = useContext(ResponseContext)
 
     const getStyle = () => {
-        if (actualCount == 0) {
-            return { width: '0%' };
-        } else if (actualCount == 1){
-            return { width: '25%' };
+        if (actualCount == 1){
+            return { width: '12,5%' };
         } else if (actualCount == 2){
-            return { width: '50%' };
+            return { width: '25%' };
         } else if (actualCount == 3){
-            return { width: '75%' };
+            return { width: '37,5%' };
         } else if (actualCount == 4){
-            return { width: '0%' };
-        } else{
+            return { width: '50%' };
+        }else if (actualCount == 5){
+            return { width: '62,5%' };
+        }else if (actualCount == 6){
+            return { width: '75%' };
+        }else if (actualCount == 7){
+            return { width: '87,5%' };
+        }else if (actualCount == 8){
+            return { width: '100%' };
+        }else{
             return { width: '0%' };
         }
     };
@@ -67,7 +73,7 @@ const Dashboard = () =>{
                         </div>
                         <div className='taskSide'>
                             <div className='taskSide-top'>
-                                <h2>Your tasks for the week</h2>
+                                <h2>Your tasks for today</h2>
                                 <img src={clock} alt="clock" />
                             </div>
                             <div className='taskSide-bottom'>

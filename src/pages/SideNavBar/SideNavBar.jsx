@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+//import react
+import { useEffect, useState, useContext } from "react";
+
+//import cookies
 import Cookies from "js-cookie";
 
 //import react router

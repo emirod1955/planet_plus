@@ -27,7 +27,6 @@ const TopNavBar = () =>{
                     <li><NavLink to="/your-footprint" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>YOUR FOOTPRINT</NavLink></li>
                     <li><NavLink to="/badges" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>BADGES</NavLink></li>
                     <li><NavLink to="/hall-of-fame" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>HALL OF FAME</NavLink></li>
-                    <li><NavLink to="account" onClick={() => {setIsNavExpanded(!isNavExpanded);}}>ACCOUNT</NavLink></li>
                 </ul>
                 <div className='topNav-networks'>
                     <Link to="https://www.instagram.com/" target='_blank'><img src={instagram} alt="instagram"/></Link>

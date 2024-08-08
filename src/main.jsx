@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom/client'
 
+//import data
 import loading from './types/loading.json'
 
 //import cookies
@@ -16,7 +17,11 @@ import { createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-r
 //import general styles
 import './assets/index.css'
 
+//imort context
 import { ResponseContext } from './context';
+
+//import axios
+import axios from 'axios';
 
 //import components
 import { TopNavBarHome } from './pages/TopNavBarHome/TopNavBarHome';
@@ -30,8 +35,6 @@ import { Badges } from './pages/Badges/Badges';
 import { HallOfFame } from './pages/HallOfFame/HallOfFame';
 
   import {ErrorPage} from './pages/ErrorPage/ErrorPage'
-
-import { Form } from './pages/Form/Form';
 
 const LogInWrapper = () =>{
   return(
@@ -52,51 +55,127 @@ const ErrorComponentsWrapper = () =>{
 }
 
 const ComponentsWrapper = () =>{
-  const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState({});
 
+  const navigate = useNavigate();
+  const [userDetails, setUserDetails] = useState({id: '000000000000000000000'});
+  
+  const [datas, setDatas] = useState([])
+  const [user, setUser] = useState([])
+
+  const [trueCount, setTrueCount] = useState(0)
+  const [tasks, setTasks] = useState(loading)
+  
+  const [response, setResponse] = useState([false, false, false, false])
+
+//getting user details and data
   const getUserDetails = async (accessToken) => {
     const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${accessToken}`);
     const data = await response.json();
     setUserDetails(data);
   };
 
+  //auth
   useEffect(() => {
     const accessToken = Cookies.get("access_token");
     if (!accessToken) {
       navigate("/");
     }
-
     getUserDetails(accessToken);
   }, [navigate]);
 
-  const [response, setResponse] = useState([true, false, true, true])
-  const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
-  const [trueCount, setTrueCount] = useState(3)
-  const [overview, setOverview] = useState('')
-  const [tasks, setTasks] = useState(loading)
+  useEffect(() => {
+    fetch('http://localhost:8081/users')
+    .then(res => res.json())
+    .then(data => setDatas(data))
+    .catch(err => console.log(err))
+
+    setUser(datas.filter(user => user.google_id == userDetails.id))
+  }, [userDetails]);
+
+  const run = async() => {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  
+    const prompt = `Tell me 4 smalls tasks that you can verify with a photo that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
+  }
+
+  const handleAddUser = () => {
+    axios.post('http://localhost:8081/add-user', {
+      user_id: Math.random(),
+      google_id: userDetails.id,
+      nmbr_tsk_completed: 0
+    })
+    .then(response => {
+      run()
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('There was an error adding the user!', error);
+      if (error.code === 'ER_DUP_ENTRY') {
+        console.log('SYSTEM_ERRORS.USER_ALREADY_EXISTS')
+      } else {
+        console.log(error.message);
+      }
+    });
+  };
 
   useEffect(() => {
-    const run = async() => {
-        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      
-        const prompt = `Tell me 4 smalls tasks that you can verify with a photo that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
-    
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
-
-        console.log(text)
-    
-        setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
+    if (user.length == 0){
+      console.log('si cargo la base de datos y el usuario no existe en ella')
+      handleAddUser()
     }
-    run()
-  }, []);
+    if (user.length == 1){
+      console.log('si cargo la base de datos y el usuario existe en ella')
+      setTrueCount(user[0].nmbr_tsk_completed) //set trueCount with db
+      setTasks(
+        [
+          {
+            "task": user[0].task_1_name,
+            "photo_instructions": user[0].task_1_description
+          },
+          {
+            "task": user[0].task_2_name,
+            "photo_instructions": user[0].task_2_description
+          },
+          {
+            "task": user[0].task_3_name,
+            "photo_instructions": user[0].task_3_description
+          },
+          {
+            "task": user[0].task_4_name,
+            "photo_instructions": user[0].task_4_description
+          }
+        ]
+      )
+      setResponse([
+        user[0].state_1 == 1 ? true : false, 
+        user[0].state_2 == 1 ? true : false,
+        user[0].state_3 == 1 ? true : false,
+        user[0].state_4 == 1 ? true : false,
+      ])
+    }
+  }, [user]);
 
   useEffect(() => {
-    const run = async() => {
-        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+    console.log(user)
+  }, [user])
+
+
+  const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
+  const [overview, setOverview] = useState('')
+
+  useEffect(() => {
+    setActualeCount(response.filter(item => item === true).length)
+  }, [response])
+
+  //Agregar que cuando el valor de trueCount cambie se actualice la base de datos
+  useEffect(() => {
+    const overwiewRun = async() => {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
         const prompt = `I did ${trueCount} tasks to contribute to my carbon footprint, motivate me to do more! IN A PARAGRAPH. Don't forget to mention how many tasks I did`;
@@ -104,12 +183,42 @@ const ComponentsWrapper = () =>{
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-    
-        console.log(text)
+  
         setOverview(text)
     }
-    run()
+    overwiewRun()
   }, [trueCount]);
+
+  const handleUpdate = (googleId) => {
+    axios.post('http://localhost:8081/update-tasks', {
+      google_id: googleId,
+      nmbr_tsk_completed: trueCount,
+      task_1_name: tasks[0].task,
+      task_1_description: tasks[0].photo_instructions,
+      state_1: response[0],
+      task_2_name: tasks[1].task,
+      task_2_description: tasks[1].photo_instructions,
+      state_2: response[1],
+      task_3_name: tasks[2].task,
+      task_3_description: tasks[2].photo_instructions,
+      state_3: response[2],
+      task_4_name: tasks[3].task,
+      task_4_description: tasks[3].photo_instructions,
+      state_4: response[3]
+    })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('There was an error updating the tasks!', error);
+    });
+  }
+
+  // Update database when trueCount+ or task change, depending on googleId
+  useEffect(() => {
+    const googleId = userDetails.id
+    handleUpdate(googleId)
+  }, [trueCount, tasks])
 
   const handleResponse = (res, pos) =>{
     setResponse(response, response[pos] = res)
@@ -118,15 +227,12 @@ const ComponentsWrapper = () =>{
     if(res === true){
         setTrueCount(prevCount => prevCount + 1)
     }
-    console.log(response)
   }
 
   const AllTaskTrue = async() => {
-
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
     const prompt = `Tell me 4 smalls tasks that you can verify with a photo that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
-    
     
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -134,13 +240,12 @@ const ComponentsWrapper = () =>{
 
     setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
     setResponse([false, false, false, false])
-    console.loh(tasks)
   }
 
   return(
     <>
       {userDetails ? (
-        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount, overview, AllTaskTrue, tasks}}>
+        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount, overview, AllTaskTrue, tasks, datas}}>
           <TopNavBar/>
           <div className='desktop-content'>
             <SideNavBar/>
@@ -165,10 +270,6 @@ const ComponentsWrapper = () =>{
         {
           path: "/",
           element: <LogIn/>
-        },
-        {
-          path: '/form',
-          element: <Form/>
         }
       ]
     },
@@ -197,7 +298,5 @@ const ComponentsWrapper = () =>{
   ]);  
 
   ReactDOM.createRoot(document.getElementById('root')).render(
-      <React.StrictMode>
         <RouterProvider router={router} />
-      </React.StrictMode>,
   )
