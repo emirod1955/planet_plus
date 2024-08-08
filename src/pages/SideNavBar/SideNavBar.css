@@ -1,6 +1,6 @@
 .sideNavBar{
     width: 30rem;
-    height: calc(100vh - 5rem);
+    min-height: calc(100vh - 5rem);
     padding: 3rem;
     background-color: #f3f3f3;
     display: flex;

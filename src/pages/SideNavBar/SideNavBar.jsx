@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 //import react router
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 //import img
 import home from './assets/home.svg'

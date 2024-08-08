@@ -1,0 +1,38 @@
+.awards{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding: 2rem 5rem 5rem 5rem;
+}
+
+.medalBox{
+    display: flex;
+    column-gap: 10rem;
+    row-gap: 5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.awardsBox h2{
+    font-size: 4rem;
+    color: #1e1e1e;
+}
+
+.awardsBox p{
+    color: #3e3e3e;
+}
+
+@media (max-width: 600px){
+    .awards{
+        gap: 3rem;
+        padding: 1rem 2rem 3rem 2rem;
+    }
+    
+    .medalBox{
+        display: flex;
+        justify-content: space-between;
+        column-gap: 0rem;
+        row-gap: 4rem;
+        margin-top: 2rem;
+    }
+}

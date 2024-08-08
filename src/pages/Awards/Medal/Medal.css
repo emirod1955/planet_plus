@@ -1,0 +1,22 @@
+.medal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.medal img{
+    width: 15rem;
+    transition: .2s;
+}
+
+.medal img:hover{
+    scale: 1.1;
+    transition: .2s;
+}
+
+@media (max-width: 400px){
+    .medal img{
+        width: 13rem;
+    }
+}
