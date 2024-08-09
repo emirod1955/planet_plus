@@ -44,7 +44,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
     const webcamRef = useRef(null);
     const ref = useRef();
 
-    const { handleResponse, response, AllTaskTrue } = useContext(ResponseContext)
+    const { handleResponse, response, AllTaskTrue, handleFace, facingMode } = useContext(ResponseContext)
 
     useEffect(() => {
         if (openModal) {
@@ -53,20 +53,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
             ref.current?.close();
         }
     }, [openModal]);
-
-    const FACING_MODE_USER = "user";
-    const FACING_MODE_ENVIRONMENT = "environment";
-
-    const [facingMode, setFacingMode] = React.useState(FACING_MODE_USER);
-
-    const handleFace = React.useCallback(() => {
-        setFacingMode((prevState) =>
-          prevState === FACING_MODE_USER
-            ? FACING_MODE_ENVIRONMENT
-            : FACING_MODE_USER
-        );
-      }, []);
-
+    
     const run = async() => {
         setLoading(true)
         setResponse('');
@@ -119,8 +106,8 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
             <div className={loading == false ? 'modalBox' : 'modalBox blank'}>
                 <div className="modal-top">
                     <div className="modal-topText">
-                        <h1>Take a picture</h1>
-                        <p>Take a photo that verifies your task and get improvements in your environment</p>
+                        <h1>Capture Your Impact</h1>
+                        <p>Take a photo of your completed task to help us verify your contribution. Let's make a difference together! 📸</p>
                     </div>
                     <button onClick={closeModal}><img src={back} alt="go back" /></button>
                 </div>
@@ -138,8 +125,8 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                     <div className="TaskVerified">
                         <div className="TaskVerified-top">
                             <div className="iconImgBox"><img src={verifiedImg} alt="check" /></div>
-                            <h2>Verified Task</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam.</p>
+                            <h2>Task Verified! 🎉</h2>
+                            <p>Your task has been successfully verified by Gemini AI. Great job on taking another step towards reducing your carbon footprint!</p>
                         </div>
                         <input type="button" value="Nice!" onClick={() => handleVerified()}/>
                     </div> 
@@ -147,8 +134,8 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                     <div className="TaskNotVerified">
                         <div className="TaskVerified-top">
                             <div className="iconImgBox"><img src={notVerifiedImg} alt="check" /></div>
-                            <h2>Unverified Task</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent faucibus, nisi dignissim laoreet tempor, nisl leo malesuada dui, vitae vehicula sem lectus sit amet quam.</p>
+                            <h2>Task Not Verified ❌</h2>
+                            <p>Oops! It looks like there was an issue verifying your task. Please double-check the details and try again.</p>
                         </div>
                         <input type="button" value="Go Back" onClick={() => handleNotVerified()}/>
                     </div>

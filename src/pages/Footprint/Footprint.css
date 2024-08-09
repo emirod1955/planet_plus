@@ -91,6 +91,10 @@
 }
 
 @media (max-width: 1000px){
+    .footprint{
+        padding-bottom: 3rem;
+    }
+
     .footprint-top{
         flex-direction: column;
         gap: 3rem;

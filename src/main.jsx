@@ -242,6 +242,10 @@ const ComponentsWrapper = () =>{
     console.log(response)
   }, [response])
 
+  useEffect(()=>{
+    console.log(userDetails)
+  }, [userDetails])
+
   const AllTaskTrue = async() => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
@@ -255,10 +259,23 @@ const ComponentsWrapper = () =>{
     setResponse([false, false, false, false])
   }
 
+  const FACING_MODE_USER = "user";
+    const FACING_MODE_ENVIRONMENT = "environment";
+
+    const [facingMode, setFacingMode] = React.useState(FACING_MODE_USER);
+
+    const handleFace = React.useCallback(() => {
+        setFacingMode((prevState) =>
+          prevState === FACING_MODE_USER
+            ? FACING_MODE_ENVIRONMENT
+            : FACING_MODE_USER
+        );
+      }, []);
+
   return(
     <>
       {userDetails ? (
-        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount, overview, AllTaskTrue, tasks, datas}}>
+        <ResponseContext.Provider value={{response, handleResponse, actualCount, trueCount, overview, AllTaskTrue, tasks, datas, userDetails, handleFace, facingMode}}>
           <TopNavBar/>
           <div className='desktop-content'>
             <SideNavBar/>

@@ -1,6 +1,9 @@
 //import react
 import { useContext } from 'react'
 
+//import react router
+import { Link } from 'react-router-dom'
+
 //import components
 import {HomeTask} from './Task/Task'
 
@@ -31,7 +34,7 @@ import medal13 from '../../assets/img/medals/medal13.png'
 import './Dashboard.css'
 
 const Dashboard = () =>{
-    const { actualCount, trueCount } = useContext(ResponseContext)
+    const { actualCount, trueCount, userDetails } = useContext(ResponseContext)
 
     const getImageSrc = (count) => {
         if (count < 0) return medal1;
@@ -76,10 +79,10 @@ const Dashboard = () =>{
                     <div className='progressSide'>
                             <div className='progressSide-top'>
                                 <div className='progressSide-topText'>
-                                    <h1>Hurrah!</h1>
+                                    <h1>Hi {userDetails.given_name}!</h1>
                                     <p>You are almost there</p>
                                 </div>
-                                <img src={imageSrc} alt="medal" />
+                                <Link to={'/awards'}><img src={imageSrc} alt="medal" /></Link>
                             </div>
                             <div className='progressSide-bottom'>
                                 <div className='progressSide-bottomText'>
