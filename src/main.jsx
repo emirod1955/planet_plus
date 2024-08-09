@@ -166,12 +166,8 @@ const ComponentsWrapper = () =>{
   }, [user])
 
 
-  const [actualCount, setActualeCount] = useState(response.filter(item => item === true).length);
+  const [actualCount, setActualCount] = useState(0);
   const [overview, setOverview] = useState('')
-
-  useEffect(() => {
-    setActualeCount(response.filter(item => item === true).length)
-  }, [response])
 
   //Agregar que cuando el valor de trueCount cambie se actualice la base de datos
   useEffect(() => {
@@ -220,14 +216,31 @@ const ComponentsWrapper = () =>{
     handleUpdate(googleId)
   }, [trueCount, tasks])
 
-  const handleResponse = (res, pos) =>{
-    setResponse(response, response[pos] = res)
+  useEffect(() => {
+    console.log(actualCount)
+  }, [actualCount])
 
-    setActualeCount(response.filter(item => item === true).length)
+  const updateStateAtPosition = (position, value) => {
+    setResponse(prevState => 
+      prevState.map((item, index) => index === position ? value : item)
+    );
+  };
+
+  const handleResponse = (res, pos) =>{
+    updateStateAtPosition(pos, res)
     if(res === true){
         setTrueCount(prevCount => prevCount + 1)
+        if (actualCount < 8){
+          setActualCount(prevCount => prevCount + 1)
+        } else if (actualCount == 8){
+          setActualCount(0)
+        }
     }
   }
+
+  useEffect(()=>{
+    console.log(response)
+  }, [response])
 
   const AllTaskTrue = async() => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -237,7 +250,7 @@ const ComponentsWrapper = () =>{
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
-
+  
     setTasks(JSON.parse(text.split('json')[1].split('```')[0]))
     setResponse([false, false, false, false])
   }

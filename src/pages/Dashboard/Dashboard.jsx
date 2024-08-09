@@ -10,9 +10,22 @@ import { ResponseContext } from '../../context'
 //import img
 import stage from './assets/stage.png'
 
-import medal from './assets/medal.png'
 import check from '../../assets/img/check.svg'
 import clock from './assets/clock.svg'
+
+import medal1 from '../../assets/img/medals/medal1.png'
+import medal2 from '../../assets/img/medals/medal2.png'
+import medal3 from '../../assets/img/medals/medal3.png'
+import medal4 from '../../assets/img/medals/medal4.png'
+import medal5 from '../../assets/img/medals/medal5.png'
+import medal6 from '../../assets/img/medals/medal6.png'
+import medal7 from '../../assets/img/medals/medal7.png'
+import medal8 from '../../assets/img/medals/medal8.png'
+import medal9 from '../../assets/img/medals/medal9.png'
+import medal10 from '../../assets/img/medals/medal10.png'
+import medal11 from '../../assets/img/medals/medal11.png'
+import medal12 from '../../assets/img/medals/medal12.png'
+import medal13 from '../../assets/img/medals/medal13.png'
 
 //import styles
 import './Dashboard.css'
@@ -20,26 +33,37 @@ import './Dashboard.css'
 const Dashboard = () =>{
     const { actualCount, trueCount } = useContext(ResponseContext)
 
-    const getStyle = () => {
-        if (actualCount == 1){
-            return { width: '12,5%' };
-        } else if (actualCount == 2){
-            return { width: '25%' };
-        } else if (actualCount == 3){
-            return { width: '37,5%' };
-        } else if (actualCount == 4){
-            return { width: '50%' };
-        }else if (actualCount == 5){
-            return { width: '62,5%' };
-        }else if (actualCount == 6){
-            return { width: '75%' };
-        }else if (actualCount == 7){
-            return { width: '87,5%' };
-        }else if (actualCount == 8){
-            return { width: '100%' };
-        }else{
-            return { width: '0%' };
-        }
+    const getImageSrc = (count) => {
+        if (count < 0) return medal1;
+        else if (count < 8) return medal2;
+        else if (count < 16) return medal3;
+        else if (count < 24) return medal4;
+        else if (count < 32) return medal5;
+        else if (count < 40) return medal6;
+        else if (count < 48) return medal7;
+        else if (count < 56) return medal8;
+        else if (count < 64) return medal9;
+        else if (count < 72) return medal10;
+        else if (count < 80) return medal11;
+        else if (count < 86) return medal12;
+        return medal13;
+    }
+
+    const imageSrc = getImageSrc(trueCount);
+
+    const getWidth = (count) => {
+        if (count === 1) return '12.5%';
+        else if (count === 2) return '25%';
+        else if (count === 3) return '37.5%';
+        else if (count === 4) return '50%';
+        else if (count === 5) return '62.5%';
+        else if (count === 6) return '75%';
+        else if (count === 7) return '87.5%';
+        return '0%';
+    };
+
+    const dinamicStyle = {
+        width: getWidth(actualCount),
     };
 
     return(
@@ -55,7 +79,7 @@ const Dashboard = () =>{
                                     <h1>Hurrah!</h1>
                                     <p>You are almost there</p>
                                 </div>
-                                <img src={medal} alt="medal" />
+                                <img src={imageSrc} alt="medal" />
                             </div>
                             <div className='progressSide-bottom'>
                                 <div className='progressSide-bottomText'>
@@ -63,7 +87,7 @@ const Dashboard = () =>{
                                     <p>{trueCount} Tasks completed</p>
                                 </div>
                                 <div className='progressBar'>
-                                    <div style={getStyle()} className='progressBar-progress'></div>
+                                    <div style={dinamicStyle} className='progressBar-progress'></div>
                                 </div>
                             </div>
                         </div>

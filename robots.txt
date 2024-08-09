@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://planet-plus01.netlify.app/

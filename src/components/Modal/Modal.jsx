@@ -97,12 +97,14 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
 
     const handleVerified = () =>{
         if (response.every(state => state === true)) {
-            setResponse('')
-            setLoading(false)
-            AllTaskTrue()
             closeModal()
+            setLoading(false)
+            setResponse('')
+            AllTaskTrue()
         } else {
             closeModal()
+            setLoading(false)
+            setResponse('')
         }
     }
 
@@ -114,7 +116,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
 
     return (
         <dialog className="modal" ref={ref} onCancel={closeModal}>
-            <div className={loading == false ? 'modalBox' :  'modalBox blank'}>
+            <div className={loading == false ? 'modalBox' : 'modalBox blank'}>
                 <div className="modal-top">
                     <div className="modal-topText">
                         <h1>Take a picture</h1>
