@@ -237,33 +237,7 @@
 }
 
 @media (max-width: 420px){
-    .TaskVerified-top{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0rem;
-    }
-
-    .iconImgBox{
-        margin-bottom: 1rem;
-    }
-
-    .verifying-message-not-verified input{
-        border-radius: 5rem;
-        color: #fff;
-        font-weight: 700;
-        font-size: 1.8rem;
-        border: none;
-        width: 25rem;
-        height: 3rem;
-    }
-
-    .verifying-message-not-verified h2{
-        font-size: 2rem;
-    }
-    
-    .verifying-message-not-verified p{
+    .modal-top p{
         font-size: 1.4rem;
     }
 }
