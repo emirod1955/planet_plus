@@ -11,10 +11,7 @@ import Cookies from "js-cookie";
 import './LogIn.css'
 
 //import img
-import hand from './assets/hand.png'
-import phone from './assets/phone.png'
-import earth from './assets/earth.png'
-import google from './assets/google.png'
+import google from './assets/google.webp'
 
 const LogIn = () =>{
     const navigate = useNavigate();
@@ -53,13 +50,6 @@ const LogIn = () =>{
                   <h1>Together for a <br /><span id='LogIn-leftHighlight'>Greener</span><br />Tomorrow</h1>
                   <p>Log in with Google to continue your journey towards a greener future. Discover simple, impactful tasks, powered by Gemini AI, that help you reduce your carbon footprint, one step at a time.</p>
                   <p><span id="LogIn-leftText-black">Not a member yet?</span> <span id="LogIn-leftText-blue" onClick={handleClick}>Join us today</span> and start making a difference!</p>
-                  <div className='LogIn-diagram'>
-                      <img src={hand} alt="hand" />
-                      <p>&rarr;</p>
-                      <img src={phone} alt="phone" />
-                      <p>&rarr;</p>
-                      <img src={earth} alt="earth" />
-                  </div>
                 </div>
                 <div className='LogIn-leftButton'>
                     <button onClick={handleClick}><img src={google} alt="" /><p>Continue with Google</p></button>

@@ -29,22 +29,11 @@
 }
 
 .LogIn-right{
-    background-image: url("./assets/background.jpg");
+    background-image: url("./assets/background.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 50vw;
-}
-
-.LogIn-diagram{
-    font-size: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.LogIn-diagram img{
-    width: 6rem;
 }
 
 .LogIn-leftButton{
@@ -100,14 +89,6 @@
     .LogIn-right{
         width: 40vw;
     }
-
-    .LogIn-diagram img{
-        width: 4rem;
-    }
-
-    .LogIn-diagram{
-        font-size: 3rem;
-    }
 }
 
 @media (max-width: 650px){
@@ -126,9 +107,5 @@
         display: flex;
         flex-direction: column;
         gap: 3rem;
-    }
-
-    .LogIn-diagram{
-        display: none;
     }
 }

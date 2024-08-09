@@ -13,7 +13,7 @@ import foot from './assets/foot.svg'
 import trophy from './assets/trophy.svg'
 import ranking from './assets/ranking.svg'
 
-import gemini from './assets/gemini.png'
+import gemini from './assets/gemini.webp'
 
 //import styles
 import './SideNavBar.css'

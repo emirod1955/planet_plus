@@ -53,7 +53,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
             ref.current?.close();
         }
     }, [openModal]);
-    
+
     const run = async() => {
         setLoading(true)
         setResponse('');
@@ -134,7 +134,7 @@ const Modal = ({openModal, closeModal, taskTitle, unique}) => {
                     <div className="TaskNotVerified">
                         <div className="TaskVerified-top">
                             <div className="iconImgBox"><img src={notVerifiedImg} alt="check" /></div>
-                            <h2>Task Not Verified ❌</h2>
+                            <h2>Task Not Verified</h2>
                             <p>Oops! It looks like there was an issue verifying your task. Please double-check the details and try again.</p>
                         </div>
                         <input type="button" value="Go Back" onClick={() => handleNotVerified()}/>

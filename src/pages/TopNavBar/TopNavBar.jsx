@@ -9,7 +9,7 @@ import './TopNavBar.css';
 
 //import img
 import menu from './assets/menu-burger.svg'
-import gemini from './assets/gemini.png'
+import gemini from './assets/gemini.webp'
 
 const TopNavBar = () =>{
     const [isNavExpanded,  setIsNavExpanded] = useState(false);
