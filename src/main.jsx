@@ -58,13 +58,14 @@ const ComponentsWrapper = () =>{
 
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({id: '000000000000000000000'});
-  
+
   const [datas, setDatas] = useState([])
   const [user, setUser] = useState([])
 
   const [trueCount, setTrueCount] = useState(0)
+  const [actualCount, setActualCount] = useState(0);
   const [tasks, setTasks] = useState(loading)
-  
+
   const [response, setResponse] = useState([false, false, false, false])
 
 //getting user details and data
@@ -94,7 +95,7 @@ const ComponentsWrapper = () =>{
 
   const run = async() => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  
+
     const prompt = `Tell me 4 smalls tasks that you can verify with a photo that contribute to reducing my carbon footprint. ONLY GIVE ME THE TASK TITLE AND A PARAGRATH ON HOW TO TAKE THE PHOTO in json (if you can, task title 4 words or less)`;
 
     const result = await model.generateContent(prompt);
@@ -106,9 +107,11 @@ const ComponentsWrapper = () =>{
 
   const handleAddUser = () => {
     axios.post('http://localhost:8081/add-user', {
-      user_id: Math.random(),
       google_id: userDetails.id,
-      nmbr_tsk_completed: 0
+      username: userDetails.name,
+      nmbr_tsk_completed: 0,
+      actual_count: 0,
+      user_picture: userDetails.picture
     })
     .then(response => {
       run()
@@ -116,11 +119,6 @@ const ComponentsWrapper = () =>{
     })
     .catch(error => {
       console.error('There was an error adding the user!', error);
-      if (error.code === 'ER_DUP_ENTRY') {
-        console.log('SYSTEM_ERRORS.USER_ALREADY_EXISTS')
-      } else {
-        console.log(error.message);
-      }
     });
   };
 
@@ -158,6 +156,7 @@ const ComponentsWrapper = () =>{
         user[0].state_3 == 1 ? true : false,
         user[0].state_4 == 1 ? true : false,
       ])
+      setActualCount(user[0].actual_count)
     }
   }, [user]);
 
@@ -165,8 +164,6 @@ const ComponentsWrapper = () =>{
     console.log(user)
   }, [user])
 
-
-  const [actualCount, setActualCount] = useState(0);
   const [overview, setOverview] = useState('')
 
   //Agregar que cuando el valor de trueCount cambie se actualice la base de datos
@@ -189,6 +186,7 @@ const ComponentsWrapper = () =>{
     axios.post('http://localhost:8081/update-tasks', {
       google_id: googleId,
       nmbr_tsk_completed: trueCount,
+      actual_count: actualCount,
       task_1_name: tasks[0].task,
       task_1_description: tasks[0].photo_instructions,
       state_1: response[0],

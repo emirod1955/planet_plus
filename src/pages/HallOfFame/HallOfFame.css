@@ -1,0 +1,94 @@
+.ranking{
+    max-width: calc(100vw - 30rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.ranking header{
+    height: 30vh;
+    background-color: #eeeeee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10rem;
+    gap: 1rem;
+}
+
+.ranking header h1{
+    font-size: 4rem;
+}
+
+.ranking header p{
+    width: 80%;
+}
+
+.ranking table{
+    width: 70%;
+    margin-top: 2rem;
+}
+
+.userBox-user{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ranking img{
+    width: 5rem;
+}
+
+.hola{
+    text-align: center;
+}
+
+.tableBox{
+    display: flex;
+    justify-content: center;
+}
+
+td:last-child{
+    text-align: center;
+}
+
+td{
+    padding: 1rem 0;
+}
+
+@media (max-width: 1150px){
+    .ranking{
+        max-width: 100vw;
+    }
+}
+
+@media (max-width: 900px){
+    .ranking header p{
+        width: 100%;
+    }
+
+    .ranking table{
+        width: 90%;
+    }
+
+    .ranking header{
+        padding: 3rem;
+    }
+}
+
+@media (max-width: 450px){
+    .ranking table{
+        font-size: 1.4rem;
+    }
+
+    .ranking header{
+        padding: 1rem;
+    }
+
+    .ranking header h1{
+        font-size: 3rem;
+    }
+    
+    .ranking header p{
+        width: 100%;
+        font-size: 1.5rem;
+    }
+}
