@@ -184,12 +184,10 @@
 
 .verifying-message-not-verified h2{
     font-size: 3rem;
-    color: #1e1e1e;
 }
 
 .verifying-message-not-verified p{
     max-width: 80%;
-    color: #3e3e3e;
     text-align: center;
 }
 

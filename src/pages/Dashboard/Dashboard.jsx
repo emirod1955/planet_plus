@@ -1,5 +1,5 @@
 //import react
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 //import react router
 import { Link } from 'react-router-dom'
@@ -69,6 +69,10 @@ const Dashboard = () =>{
         width: getWidth(actualCount),
     };
 
+    useState(()=>{
+        console.log(actualCount)
+    }, [actualCount])
+
     return(
             <div className='home'>
                 <section className='stageBox'>
@@ -80,7 +84,7 @@ const Dashboard = () =>{
                             <div className='progressSide-top'>
                                 <div className='progressSide-topText'>
                                     <h1>Hi {userDetails.given_name}!</h1>
-                                    <p>You are almost there</p>
+                                    <p>Go for your next achievement!</p>
                                 </div>
                                 <Link to={'/awards'}><img src={imageSrc} alt="medal" /></Link>
                             </div>

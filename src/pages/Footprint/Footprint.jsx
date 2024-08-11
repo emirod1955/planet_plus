@@ -1,5 +1,7 @@
 //import react
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+
+import axios from "axios";
 
 //import context
 import { ResponseContext } from "../../context";
@@ -15,33 +17,23 @@ import { TaskFootprint } from "./TaskFootprint/TaskFootprint";
 import './Footprint.css'
 import '../../assets/loading.css'
 
-const Graph = () =>{
-    const { trueCount } = useContext(ResponseContext)
-
-    return(
-        <StyledEngineProvider injectFirst>
-            <div className="graphBox">
-                <LineChart
-                    xAxis={[{ data: [1, 3, 5, 8, 10] }]}
-                    series={[
-                        { curve: "natural", data: [-1, 2, 5, 3, trueCount], color: '#7BAC23'},
-                        { curve: "natural", data: [2, 1, 4, 1, 2], color: '#666666'}
-                    ]}
-                    axisHighlight={{
-                        x: 'none', 
-                        y: 'none', 
-                    }}
-                    leftAxis={null}
-                    bottomAxis={null}
-                />
-            </div>
-        </StyledEngineProvider>
-    );
-}
-
 const Footprint = () =>{
 
-    const { overview } = useContext(ResponseContext)
+    const { overview, trueCount } = useContext(ResponseContext)
+
+    const [average, setAverage] = useState(0);
+
+    useEffect(() => {
+        axios.get('http://localhost:8081/average-tasks-completed')
+        .then(response => {
+            setAverage(response.data.average);
+        })
+        .catch(error => {
+            console.error('There was an error fetching the average tasks completed!', error);
+        });
+    }, []);
+
+
 
     return(
                     <div className="footprint">
@@ -58,11 +50,27 @@ const Footprint = () =>{
                                     </div>
                                     <div className="footprintGraph-bottom">
                                         <div className="footprintText-bottom">
-                                            <h2>382 kg</h2>
-                                            <p><span style={{color: '#7BAC23', fontWeight: '700'}}>Your carbon footprint</span> in the last week</p>
-                                            <p>That's 75kg CO₂ above <span style={{color: '#666666', fontWeight: '700'}}>average</span></p>
+                                            <h2>{trueCount} Tasks</h2>
+                                            <p><span style={{color: '#7BAC23', fontWeight: '700'}}>You have completed</span> {trueCount} tasks on this journey</p>
+                                            <p>That's {Math.abs(trueCount - average.toFixed(2))} tasks {trueCount > average.toFixed(2) ? "above" : "below"} <span style={{color: '#666666', fontWeight: '700'}}>average</span></p>
                                         </div>
-                                        <Graph/>
+                                        <StyledEngineProvider injectFirst>
+                                            <div className="graphBox">
+                                                <LineChart
+                                                    xAxis={[{ data: [1, 3, 5, 8, 10] }]}
+                                                    series={[
+                                                        { curve: "natural", data: [0, 0.2*(trueCount), 0.5*(trueCount), 0.2*(trueCount), trueCount], color: '#7BAC23'},
+                                                        { curve: "natural", data: [0, average.toFixed(2)*0.2, average.toFixed(2)*0.5, average.toFixed(2)*0.2, average.toFixed(2)], color: '#666666'}
+                                                    ]}
+                                                    axisHighlight={{
+                                                        x: 'none', 
+                                                        y: 'none', 
+                                                    }}
+                                                    leftAxis={null}
+                                                    bottomAxis={null}
+                                                />
+            </div>
+        </StyledEngineProvider>
                                     </div>
                                 </div>
                                 <div className="footprint-bottom">

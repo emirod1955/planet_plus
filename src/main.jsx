@@ -214,10 +214,6 @@ const ComponentsWrapper = () =>{
     handleUpdate(googleId)
   }, [trueCount, tasks])
 
-  useEffect(() => {
-    console.log(actualCount)
-  }, [actualCount])
-
   const updateStateAtPosition = (position, value) => {
     setResponse(prevState => 
       prevState.map((item, index) => index === position ? value : item)
@@ -228,21 +224,17 @@ const ComponentsWrapper = () =>{
     updateStateAtPosition(pos, res)
     if(res === true){
         setTrueCount(prevCount => prevCount + 1)
-        if (actualCount < 8){
-          setActualCount(prevCount => prevCount + 1)
-        } else if (actualCount == 8){
+        if (actualCount == 7){
           setActualCount(0)
+        } else{
+          setActualCount(prevCount => prevCount + 1)
         }
-    }
+      }
   }
 
   useEffect(()=>{
-    console.log(response)
-  }, [response])
-
-  useEffect(()=>{
-    console.log(userDetails)
-  }, [userDetails])
+    console.log(actualCount)
+  }, [actualCount])
 
   const AllTaskTrue = async() => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });

@@ -23,6 +23,7 @@ import medal9 from '../../assets/img/medals/medal9.webp'
 import medal10 from '../../assets/img/medals/medal10.webp'
 import medal11 from '../../assets/img/medals/medal11.webp'
 import medal12 from '../../assets/img/medals/medal12.webp'
+import medal13 from '../../assets/img/medals/medal13.webp'
 
 const HallOfFame = () =>{
 
@@ -45,7 +46,7 @@ const HallOfFame = () =>{
         return medal13;
     }
 
-    const imageSrc = getImageSrc(trueCount);
+    getImageSrc(trueCount);
 
     useEffect(() => {
         axios.get('http://localhost:8081/top-users', {
@@ -81,7 +82,7 @@ const HallOfFame = () =>{
                                 <img src={user.user_picture} alt={user.username}/>
                                 <p>{user.username}</p>
                             </td>
-                            <td className='hola'><img src={imageSrc} alt="" srcset="" /></td>
+                            <td className='hola'><img src={getImageSrc(user.nmbr_tsk_completed)} alt="" srcset="" /></td>
                             <td>
                                 <p>{user.nmbr_tsk_completed}</p>
                             </td>
