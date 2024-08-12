@@ -33,8 +33,6 @@ const Footprint = () =>{
         });
     }, []);
 
-
-
     return(
                     <div className="footprint">
                             <div className="footprintBox">

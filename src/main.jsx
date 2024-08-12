@@ -84,14 +84,20 @@ const ComponentsWrapper = () =>{
     getUserDetails(accessToken);
   }, [navigate]);
 
-  useEffect(() => {
-    fetch('http://localhost:8081/users')
-    .then(res => res.json())
-    .then(data => setDatas(data))
-    .catch(err => console.log(err))
+  // useEffect(() => {
+  //   fetch('http://localhost:8081/users')
+  //   .then(res => res.json())
+  //   .then(data => setDatas(data))
+  //   .catch(err => console.log(err))
 
-    setUser(datas.filter(user => user.google_id == userDetails.id))
-  }, [userDetails]);
+  //   setUser(datas.filter(user => user.google_id == userDetails.id))
+  // }, [userDetails]);
+
+  //uncomment 2 things
+
+   useEffect(() =>{
+      run()
+   }, [userDetails])
 
   const run = async() => {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -122,43 +128,43 @@ const ComponentsWrapper = () =>{
     });
   };
 
-  useEffect(() => {
-    if (user.length == 0){
-      console.log('si cargo la base de datos y el usuario no existe en ella')
-      handleAddUser()
-    }
-    if (user.length == 1){
-      console.log('si cargo la base de datos y el usuario existe en ella')
-      setTrueCount(user[0].nmbr_tsk_completed) //set trueCount with db
-      setTasks(
-        [
-          {
-            "task": user[0].task_1_name,
-            "photo_instructions": user[0].task_1_description
-          },
-          {
-            "task": user[0].task_2_name,
-            "photo_instructions": user[0].task_2_description
-          },
-          {
-            "task": user[0].task_3_name,
-            "photo_instructions": user[0].task_3_description
-          },
-          {
-            "task": user[0].task_4_name,
-            "photo_instructions": user[0].task_4_description
-          }
-        ]
-      )
-      setResponse([
-        user[0].state_1 == 1 ? true : false, 
-        user[0].state_2 == 1 ? true : false,
-        user[0].state_3 == 1 ? true : false,
-        user[0].state_4 == 1 ? true : false,
-      ])
-      setActualCount(user[0].actual_count)
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user.length == 0){
+  //     console.log('si cargo la base de datos y el usuario no existe en ella')
+  //     handleAddUser()
+  //   }
+  //   if (user.length == 1){
+  //     console.log('si cargo la base de datos y el usuario existe en ella')
+  //     setTrueCount(user[0].nmbr_tsk_completed) //set trueCount with db
+  //     setTasks(
+  //       [
+  //         {
+  //           "task": user[0].task_1_name,
+  //           "photo_instructions": user[0].task_1_description
+  //         },
+  //         {
+  //           "task": user[0].task_2_name,
+  //           "photo_instructions": user[0].task_2_description
+  //         },
+  //         {
+  //           "task": user[0].task_3_name,
+  //           "photo_instructions": user[0].task_3_description
+  //         },
+  //         {
+  //           "task": user[0].task_4_name,
+  //           "photo_instructions": user[0].task_4_description
+  //         }
+  //       ]
+  //     )
+  //     setResponse([
+  //       user[0].state_1 == 1 ? true : false, 
+  //       user[0].state_2 == 1 ? true : false,
+  //       user[0].state_3 == 1 ? true : false,
+  //       user[0].state_4 == 1 ? true : false,
+  //     ])
+  //     setActualCount(user[0].actual_count)
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     console.log(user)

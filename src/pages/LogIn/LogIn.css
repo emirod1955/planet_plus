@@ -97,6 +97,10 @@
     }
 
     .LogIn-right{
+        display: none;
+    }
+
+    .LogIn-right{
         width: 100vw;
         height: calc(100vh - 5rem);
         position: absolute;
